@@ -24,12 +24,12 @@ nav {
   scroll-behavior: smooth;
   /* border-right: solid 0.0625rem var(--nav-bg2); */
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.75);
+  background-color: var(--nav-bg);
 }
 
 .nav {
   display: flex 5rem;
   flex-direction: column;
-  background-color: var(--nav-bg);
   position: relative;
   list-style: none;
   padding: 0;
