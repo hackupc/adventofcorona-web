@@ -9,7 +9,7 @@
 <body>
   <nav>
     <ul class="nav nav--others">
-      <li><a href="/#home" title="Home">🏠</a></li>
+      <li><a href="/#home" title="Home">❔</a></li>
       <li><a href="/#login" title="Log In">👤</a></li>
     </ul>
     <ul class="nav nav--problems">
@@ -30,17 +30,24 @@
     </ul>
   </nav>
   <main>
-    <h1>Problem <span>1</span></h1>
-    <div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est nesciunt voluptatum pariatur expedita quaerat quibusdam eum, ipsum ut! Repudiandae amet neque inventore consequuntur? Nesciunt quam totam rem? Accusantium, cumque consectetur!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, in ea repudiandae consequuntur iure voluptatibus autem consequatur repellendus tempora impedit qui aspernatur commodi, provident voluptatem velit officiis, illum quae nihil?</p>
+    <div class="problem">
+      <h1>Problem <span>1</span></h1>
+      <div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est nesciunt voluptatum pariatur expedita quaerat quibusdam eum, ipsum ut! Repudiandae amet neque inventore consequuntur? Nesciunt quam totam rem? Accusantium, cumque consectetur!</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, in ea repudiandae consequuntur iure voluptatibus autem consequatur repellendus tempora impedit qui aspernatur commodi, provident voluptatem velit officiis, illum quae nihil?</p>
+      </div>
     </div>
     <div class="answer">
       <h2>Answer</h2>
       <textarea name="answer" id="answer-imput" cols="30" rows="2"></textarea>
-      <div class="feedback">
-        <span id="answer-good">Ops... Wrong answer</span>
-        <span id="answer-bad">Yay! Right answer</span>
+      <div class="answer-row">
+        <a class="logo" href="https://hackersatupc.org">
+          <!-- <img src="/img/logo.svg" alt="Hackers@UPC logo"> -->
+          <img src="/img/logo.png" style="filter: grayscale(1) brightness(100)" alt="Hackers@UPC logo">
+        </a>
+        <span class="feedback" id="feedback-false">Ops... Wrong answer 🤒</span>
+        <span class="feedback" id="feedback-true">Yay! Right answer 😷</span>
+        <span class="feedback" id="feedback-undefined">Error evaluating your answer, try later 😵</span>
         <button>Send</button>
       </div>
     </div>
