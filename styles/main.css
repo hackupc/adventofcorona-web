@@ -232,9 +232,7 @@ main {
   text-align: right;
   margin-right: 1rem;
 }
-.feedback {
-  animation: ;
-}
+
 #feedback-true { color: #7bee8e; animation: heartBeat 1.3s ease-in-out; }
 #feedback-false { color: #ee7b8b; animation: shake 0.4s linear; }
 #feedback-undefined { color: #cccccc; animation: flash 1s linear; }
