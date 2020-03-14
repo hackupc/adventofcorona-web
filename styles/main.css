@@ -1,6 +1,8 @@
 body {
   display: grid;
+  grid-template: auto / 5em auto;
   margin: 0;
   height: 100vh;
   background: #000;
+  color: #fff;
 }
