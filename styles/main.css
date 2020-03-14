@@ -1,6 +1,9 @@
 :root {
-  --nav-bg: #222;
+  --bg: #222;
+  --nav-bg: #191919;
   --nav-txt: #fff;
+  --nav-bg2: #363537;
+  --nav-bg-hover: #8B888F;
 }
 
 body {
@@ -8,7 +11,7 @@ body {
   grid-template: auto / 5rem auto;
   margin: 0;
   height: 100vh;
-  background: #000;
+  background: var(--bg);
   color: #fff;
   font-family: monospace;
 }
@@ -17,21 +20,26 @@ nav {
   position: relative;
   overflow: auto;
   scroll-behavior: smooth;
+  /* border-right: solid 0.0625rem var(--nav-bg2); */
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.75);
 }
 
-nav > ul {
+.nav {
   display: flex 5rem;
   flex-direction: column;
   background-color: var(--nav-bg);
   position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-nav > ul::before {
+.nav--problems::before {
   content: '';
   position: absolute;
   top: 2.5rem;
   left: 2.375rem;
   height: calc(100% - 5rem);
-  border-left: dotted 0.25rem var(--nav-txt);
+  border-left: dotted 0.25rem var(--nav-bg2);
   z-index: 0;
 }
 
@@ -52,23 +60,40 @@ nav::-webkit-scrollbar-thumb {
 	background-color: #666;	
 } */
 
-nav > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav > ul.home{
+.nav--others{
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
   background-color: var(--nav-bg);
-  border-bottom: solid 0.0625rem #555;
+  border-bottom: solid 0.0625rem var(--nav-bg2);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.75);
+}
+.nav--others > li {
+  --nav-txt: #fff;
 }
 
-nav > ul > li > a {
+.nav--problems > li.aviable {
+  --nav-txt: #fff;
+}
+.nav--problems > li:not(.aviable) > a {
+  cursor: not-allowed;
+}
+.nav > li.active {
+  /* --nav-txt: #00b5bb; */
+  --nav-bg: #555;
+}
+
+.nav--problems > li.done {
+  --nav-txt: #24a36e;
+}
+
+.nav--problems > li {
+  --nav-txt: var(--nav-bg2);
+}
+
+.nav > li > a {
   font-size: 2rem;
   color: var(--nav-txt);
   height: 5rem;
@@ -82,11 +107,11 @@ nav > ul > li > a {
   z-index: 1;
 }
 
-nav > ul > li > a:hover::before {
-  background-color: #555;
+.nav > li > a:hover::before {
+  background-color: #444;
 }
 
-nav > ul > li > a::before {
+.nav > li > a::before {
   content: '';
   position: absolute;
   border-radius: 5rem;
