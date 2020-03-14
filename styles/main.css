@@ -1,8 +1,32 @@
 body {
   display: grid;
-  grid-template: auto / 5em auto;
+  grid-template: auto / 5rem auto;
   margin: 0;
   height: 100vh;
   background: #000;
   color: #fff;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #222;
+}
+
+nav > a {
+  font-size: 2rem;
+  color: #fff;
+  height: 5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+nav > a:hover {
+  background-color: #555;
+}
+
+main {
+  padding: 2rem;
 }
