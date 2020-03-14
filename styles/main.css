@@ -1,5 +1,6 @@
 :root {
   --nav-bg: #222;
+  --nav-txt: #fff;
 }
 
 body {
@@ -9,13 +10,29 @@ body {
   height: 100vh;
   background: #000;
   color: #fff;
+  font-family: monospace;
 }
+
 nav {
+  position: relative;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+nav > ul {
   display: flex 5rem;
   flex-direction: column;
   background-color: var(--nav-bg);
-  overflow: auto;
-  scroll-behavior: smooth;
+  position: relative;
+}
+nav > ul::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  left: 2.375rem;
+  height: calc(100% - 5rem);
+  border-left: dotted 0.25rem var(--nav-txt);
+  z-index: 0;
 }
 
 nav::-webkit-scrollbar {
@@ -35,9 +52,25 @@ nav::-webkit-scrollbar-thumb {
 	background-color: #666;	
 } */
 
-nav > a {
+nav > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav > ul.home{
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: var(--nav-bg);
+  border-bottom: solid 0.0625rem #555;
+}
+
+nav > ul > li > a {
   font-size: 2rem;
-  color: #fff;
+  color: var(--nav-txt);
   height: 5rem;
   box-sizing: border-box;
   display: flex;
@@ -45,10 +78,25 @@ nav > a {
   justify-content: center;
   text-decoration: none;
   line-height: 1;
+  position: relative;
+  z-index: 1;
 }
 
-nav > a:hover {
+nav > ul > li > a:hover::before {
   background-color: #555;
+}
+
+nav > ul > li > a::before {
+  content: '';
+  position: absolute;
+  border-radius: 5rem;
+  border: solid 0.125rem var(--nav-txt);
+  top: 0.667rem;
+  bottom: 0.667rem;
+  left: 0.667rem;
+  right: 0.667rem;
+  background-color: var(--nav-bg);
+  z-index: -1;
 }
 
 main {
