@@ -143,7 +143,7 @@ nav::-webkit-scrollbar-thumb {
 main {
   padding: 2rem;
   display: grid;
-  grid-template: auto min-content / auto;
+  grid-template: 2fr 1fr / auto;
   height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   position: relative;
@@ -163,10 +163,18 @@ main {
   height: 2rem;
 }
 
+.answer {
+  display: flex;
+  flex-direction: column;
+}
+.answer > h2 {
+  margin-top: 0;
+  line-height: 1;
+}
 .answer > textarea {
   width: 100%;
+  flex-grow: 1;
   min-height: 2.5rem;
-  height: 10rem;
   background-color: #000;
   border: none;
   border-radius: 0.5rem;
