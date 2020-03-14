@@ -142,6 +142,7 @@ main {
   height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   position: relative;
+  overflow: auto;
 }
 
 .problem {
@@ -279,21 +280,27 @@ main {
 .bg > .bg-logo {
   width: 40rem;
   max-width: calc(100% - 4rem);
+  max-height: 33%;
 }
 .bg-dot {
   position: absolute;
   width: 15rem;
   max-width: 30%;
+  max-height: 50%;
+  object-fit: contain;
 }
 .bg-dot--1 {
   left: -3rem;
   bottom: -3rem;
+  object-position: left bottom;
 }
 .bg-dot--2 {
   right: 0rem;
   bottom: -4rem;
+  object-position: right bottom;
 }
 .bg-dot--3 {
   right: 0rem;
   top: 5rem;
+  object-position: right top;
 }
