@@ -12,7 +12,7 @@ body {
   display: grid;
   grid-template: auto / 5rem auto;
   margin: 0;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: var(--bg);
   color: #fff;
   font-family: monospace;
@@ -139,12 +139,13 @@ main {
   padding: 2rem;
   display: grid;
   grid-template: auto min-content / auto;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   position: relative;
 }
 
 .problem {
+  min-height: 10rem;
   overflow: auto;
   scroll-behavior: smooth;
 }
@@ -292,9 +293,9 @@ main {
 }
 .bg-dot--2 {
   right: 0rem;
-  bottom: -1rem;
+  bottom: -4rem;
 }
 .bg-dot--3 {
   right: 0rem;
-  top: 4rem;
+  top: 5rem;
 }
