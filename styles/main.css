@@ -291,10 +291,11 @@ main {
   overflow: hidden;
   user-select: none;
 }
-.bg > .bg-logo {
+.bg-logo {
   width: 40rem;
   max-width: calc(100% - 4rem);
   max-height: 33%;
+  display: none;
 }
 .bg-dot {
   position: absolute;
@@ -317,4 +318,10 @@ main {
   right: 0rem;
   top: 5rem;
   object-position: right top;
+}
+
+@media(min-width: 44rem){
+  .bg-logo{
+    display: block;
+  }
 }
