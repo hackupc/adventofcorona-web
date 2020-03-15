@@ -242,11 +242,11 @@ main {
 }
 .answer-row > span {
   display: none;
-  flex-grow: 1;
   text-align: right;
   margin-right: 1rem;
 }
 
+.grow { flex-grow: 1; display: inline-block !important; }
 #feedback-true { color: #7bee8e; animation: heartBeat 1.3s ease-in-out; }
 #feedback-false { color: #ee7b8b; animation: shake 0.4s linear; }
 #feedback-undefined { color: #cccccc; animation: flash 1s linear; }
