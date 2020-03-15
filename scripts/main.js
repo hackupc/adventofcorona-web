@@ -1,13 +1,19 @@
 var currentProblemId = 0;
-var problems;
-var progress;
+var problems = localStorage.getItem('problems');
+var progress = localStorage.getItem('progress');
 Promise.all([
   fetch('data/problems.json')
     .then(response => response.json())
-    .then(content => problems = content),
+    .then(content => {
+      problems = content;
+      localStorage.setItem('problems', problems);
+    }),
   fetch('data/progress.json')
     .then(response => response.json())
-    .then(content => progress = content),
+    .then(content => {
+      progress = content;
+      localStorage.setItem('progress', progress);
+    }),
 ]).then((values => {
   router.navigateTo(`/problem/${currentProblemId}`);
 }));
@@ -49,15 +55,21 @@ shareButton.addEventListener('click', event => {
 const router = new Router({
   mode: 'hash',
   page404: (path) => {
-    console.log('"/' + path + '" Page not found');
-    console.log('Navigating to /');
-    
-    router.navigateTo('/');
+    console.log('"/' + path + '" Page not found');    
+    router.navigateTo('/help');
   }
 });
 
 router.add('/', () => {
+  router.navigateTo('/help');
+});
 
+router.add('/help', () => {
+  
+});
+
+router.add('/login', () => {
+  
 });
 
 router.add('/problem/(:num)', displayProblem);
