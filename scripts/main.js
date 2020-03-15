@@ -1,6 +1,7 @@
 var currentProblemId = 0;
-var problems = localStorage.getItem('problems');
-var progress = localStorage.getItem('progress');
+var problems = JSON.parse(localStorage.getItem('problems')) || [];
+var progress = JSON.parse(localStorage.getItem('progress'));
+var user = JSON.parse(localStorage.getItem('user'));
 const problemTitleElem = document.getElementById('problem-title');
 const problemStatementElem = document.getElementById('problem-statement');
 const answerInputElem = document.getElementById('answer-imput');
@@ -10,6 +11,8 @@ const feedbackElem = {
   undefined: document.getElementById('feedback-undefined'),
 }
 const problemListElem = document.getElementsByClassName('nav--problems')[0];
+const sendElem = document.getElementById('send-button');
+const userEmojiElem = document.getElementById('user-emoji');
 
 // ----- Real 100vh ----- //
 function updateRealVH() {
@@ -70,19 +73,66 @@ Promise.all([
     .then(response => response.json())
     .then(content => {
       problems = content;
-      localStorage.setItem('problems', problems);
+      localStorage.setItem('problems', JSON.stringify(problems));
     }),
   fetch('data/progress.json')
     .then(response => response.json())
     .then(content => {
       progress = content;
-      localStorage.setItem('progress', progress);
+      localStorage.setItem('progress', JSON.stringify(progress));
+    }),
+  fetch('data/user.json')
+    .then(response => response.json())
+    .then(content => {
+      user = content;
+      localStorage.setItem('user', JSON.stringify(user));
+      displayUser();
     }),
 ]).then((values => {
   displayProblemList();
   router.navigateTo(`/problem/${currentProblemId}`);
 }));
 displayProblemList();
+
+sendElem.addEventListener('click', event => {
+  fetch('data/answer-right.json', { // TODO: replace this with real api
+    // method: 'POST',
+    // headers: {
+    //   'Content-Type': 'application/json;charset=utf-8'
+    // },
+    // body: JSON.stringify({
+    //   username: user.username,
+    //   answer: answerInputElem.textContent,
+    // }),
+  })
+    .then(response => response.json())
+    .then(content => {
+      feedbackElem.true.style.display = 'none';
+      feedbackElem.false.style.display = 'none';
+      feedbackElem.undefined.style.display = 'none';
+      switch (content.isCorrect) {
+        case true:
+          void feedbackElem.true.offsetWidth;
+          feedbackElem.true.style.display = 'block';
+          if(progress.problems.solved.indexOf(currentProblemId) === -1) progress.problems.solved.push(parseInt(currentProblemId));
+          progress.problems.lastAcceptedAnswer[currentProblemId] = content.answer;
+          document.querySelector(`.nav--problems > [data-id='${currentProblemId}']`).classList.add('done');
+        break;
+        case false:
+          void feedbackElem.false.offsetWidth;
+          feedbackElem.false.style.display = 'block';
+          break;
+        default:
+          void feedbackElem.undefined.offsetWidth;
+          feedbackElem.undefined.style.display = 'block';
+        break;
+      }
+    })
+});
+
+function displayUser(){
+  userEmojiElem.textContent = user.emoji;
+}
 
 function displayProblem(problemId) {
   currentProblemId = problemId;
