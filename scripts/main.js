@@ -1,22 +1,6 @@
 var currentProblemId = 0;
 var problems = localStorage.getItem('problems');
 var progress = localStorage.getItem('progress');
-Promise.all([
-  fetch('data/problems.json')
-    .then(response => response.json())
-    .then(content => {
-      problems = content;
-      localStorage.setItem('problems', problems);
-    }),
-  fetch('data/progress.json')
-    .then(response => response.json())
-    .then(content => {
-      progress = content;
-      localStorage.setItem('progress', progress);
-    }),
-]).then((values => {
-  router.navigateTo(`/problem/${currentProblemId}`);
-}));
 const problemTitleElem = document.getElementById('problem-title');
 const problemStatementElem = document.getElementById('problem-statement');
 const answerInputElem = document.getElementById('answer-imput');
@@ -25,6 +9,8 @@ const feedbackElem = {
   false: document.getElementById('feedback-false'),
   undefined: document.getElementById('feedback-undefined'),
 }
+const problemListElem = document.getElementsByClassName('nav--problems')[0];
+
 // ----- Real 100vh ----- //
 function updateRealVH() {
   let vh = window.innerHeight * 0.01;
@@ -32,7 +18,6 @@ function updateRealVH() {
 }
 updateRealVH();
 window.addEventListener('resize', updateRealVH);
-
 
 // ----- Share button ----- //
 const shareButton = document.getElementById('share');
@@ -80,6 +65,25 @@ router.add('about', () => {
 
 router.addUriListener();
 
+Promise.all([
+  fetch('data/problems.json')
+    .then(response => response.json())
+    .then(content => {
+      problems = content;
+      localStorage.setItem('problems', problems);
+    }),
+  fetch('data/progress.json')
+    .then(response => response.json())
+    .then(content => {
+      progress = content;
+      localStorage.setItem('progress', progress);
+    }),
+]).then((values => {
+  displayProblemList();
+  router.navigateTo(`/problem/${currentProblemId}`);
+}));
+displayProblemList();
+
 function displayProblem(problemId) {
   currentProblemId = problemId;
   answerInputElem.textContent = progress.problems.lastAcceptedAnswer[currentProblemId] || '';
@@ -88,8 +92,15 @@ function displayProblem(problemId) {
   feedbackElem.true.style.display = 'none';
   feedbackElem.false.style.display = 'none';
   feedbackElem.undefined.style.display = 'none';
-  let elem = document.querySelector('.nav--problems > .active').classList.remove('active');
+  let elem = document.querySelector('.nav--problems > .active')
+  if(elem) elem.classList.remove('active');
   document.querySelector(`.nav--problems > [data-id='${currentProblemId}']`).classList.add('active');
+}
+
+function displayProblemList() {
+  problemListElem.innerHTML = problems.reduce((prev, problem) => {
+    return `${prev}<li class="${Date.parse(problem.releaseDate) <= Date.now() ? 'aviable' : ''} ${progress.problems.solved.includes(problem.id) ? 'done' : ''}" data-id="${problem.id}"><a href="#/problem/${problem.id}" title="${problem.title}">${problem.id + 1}</a></li>`
+  }, '');
 }
 
 // TODO: Fill problem list
