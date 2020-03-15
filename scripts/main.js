@@ -147,15 +147,27 @@ function displayUser(){
 
 function displayProblem(problemId) {
   currentProblemId = parseInt(problemId);
+  let problem = problems[currentProblemId];
   answerInputElem.value = progress.problems.lastAcceptedAnswer[currentProblemId] || '';
-  problemTitleElem.textContent = problems[currentProblemId].title;
-  problemStatementElem.textContent = problems[currentProblemId].statement;
   feedbackElem.true.style.display = 'none';
   feedbackElem.false.style.display = 'none';
   feedbackElem.undefined.style.display = 'none';
   let elem = document.querySelector('.nav--problems > .active')
   if(elem) elem.classList.remove('active');
   document.querySelector(`.nav--problems > [data-id='${currentProblemId}']`).classList.add('active');
+  let releaseDate = Date.parse(problem.releaseDate);
+  if(releaseDate <= Date.now()){
+    sendElem.disabled = false;
+    answerInputElem.disabled = false;
+    problemTitleElem.textContent = problem.title;
+    problemStatementElem.textContent = problem.statement;
+  }else {
+    sendElem.disabled = true;
+    answerInputElem.disabled = true;
+    problemTitleElem.textContent = problem.title || 'Future problem';
+    let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    problemStatementElem.textContent = `Not aviable. Wait until ${new Date(releaseDate).toLocaleTimeString('en-ES', dateOptions)}.`;
+  }
 }
 
 function displayProblemList() {
