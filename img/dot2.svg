@@ -1,4 +1,1 @@
-<svg width="400" height="800" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M134 800V257L214 177" stroke="white" stroke-width="30"/>
-<circle r="30" transform="matrix(-1 0 0 1 235 156)" stroke="white" stroke-width="30"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" fill="none" viewBox="0 0 400 800"><path stroke="#fff" stroke-width="30" d="M134 800V257L214 177"/><circle r="30" stroke="#fff" stroke-width="30" transform="matrix(-1 0 0 1 235 156)"/></svg>
