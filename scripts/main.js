@@ -15,6 +15,9 @@ const problemListElem = document.getElementsByClassName('nav--problems')[0];
 const sendElem = document.getElementById('send-button');
 const userEmojiElem = document.getElementById('user-emoji');
 
+const apiBaseUrl = 'https://corona-2w3jqbocga-ew.a.run.app';
+var apiAuthToken = localStorage.getItem('apiAuthToken');
+
 // ----- Real 100vh ----- //
 function updateRealVH() {
   let vh = window.innerHeight * 0.01;
@@ -98,23 +101,25 @@ displayProblemList();
 sendElem.addEventListener('click', event => {
   if(lastResult.answer === answerInputElem.value 
     && lastResult.problemId === currentProblemId) {
-      displayResult();
-      return;
-    }
-  fetch('data/answer-right.json', { // TODO: replace this with real api
-    // method: 'POST',
-    // headers: {
-    //   'Content-Type': 'application/json;charset=utf-8'
-    // },
-    // body: JSON.stringify({
-    //   username: user.username,
-    //   answer: answerInputElem.value,
-    // }),
+    displayResult();
+    return;
+  }
+  fetch(`${apiBaseUrl}/submit`, { // TODO: replace this with real api
+    method: 'POST',
+    headers: {
+      Authentication: apiAuthToken,
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      username: user.username,
+      answer: answerInputElem.value,
+      problem: currentProblemId,
+    }),
   })
     .then(response => response.json())
     .then(content => {
       lastResult = content;
-      displayResult()
+      displayResult();
     })
 });
 
