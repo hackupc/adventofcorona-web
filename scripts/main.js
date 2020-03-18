@@ -57,11 +57,11 @@ router.add('/', () => {
 });
 
 router.add('/help', () => {
-  
+  popup('help', 'open')
 });
 
 router.add('/login', () => {
-  
+  popup('user', 'open')
 });
 
 router.add('/problem/(:num)', displayProblem);
@@ -182,3 +182,58 @@ function displayProblemList() {
 }
 
 // TODO: Fill problem list
+
+
+
+
+
+function sendUserForm() {
+  // fetch(`${apiBaseUrl}/register`, { // TODO: replace this with real api
+  //   method: 'POST',
+  //   headers: {
+  //     // Authentication: apiAuthToken,
+  //     'Content-Type': 'application/json;charset=utf-8',
+  //   },
+  //   body: JSON.stringify({
+  //     username: user.username,
+  //     answer: answerInputElem.value,
+  //     problem: currentProblemId,
+  //   }),
+  // })
+  //   .then(response => response.json())
+  //   .then(content => {
+  //     lastResult = content;
+  //     displayResult();
+  //   })
+  popup('user', 'close');
+}
+
+
+const popupElems = document.querySelectorAll('.popup');
+popupElems.forEach(el => el.addEventListener('click', event => {
+  if (event.target.classList.contains('popup')) {
+    popup(event.target.dataset.popup, 'close');
+  }
+}));
+
+function popup(popupId, action = 'toggle') {
+  let popupElem = document.querySelector(`.popup[data-popup="${popupId}"]`);
+  
+  switch (action) {
+    case 'open':
+      popupElem.style.display = 'flex';
+      break;
+      case 'close':
+        popupElem.style.display = 'none';
+        router.back()
+      break;
+    default:
+    case 'toggle':
+      if (popupElem.style.display === 'none') {
+        popup(popupId, 'open');
+      } else {
+        popup(popupId, 'close');
+      }
+      break;
+  }
+}

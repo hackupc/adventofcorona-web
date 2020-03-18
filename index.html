@@ -11,7 +11,7 @@
 <body>
   <nav>
     <ul class="nav nav--others">
-      <li><a href="#/home" title="Help">❔</a></li>
+      <li><a href="#/help" title="Help">❔</a></li>
       <li><a href="#/login" title="Log In" id="user-emoji">👤</a></li>
       <li style="display: none;"><a href="#share" id="share" title="share">📤</a></li>
     </ul>
@@ -43,6 +43,31 @@
       </div>
     </div>
   </main>
+  <div class="popup" data-popup="user" style="display: none;">
+    <div class="popup__box scrollBar">
+      <h3>Register/Login</h3>
+      <div class="popup__content">
+        <label for="popup-username">Username</label>
+        <input type="text" name="username" id="popup-username">
+        <label for="popup-password">Password</label>
+        <input type="password" name="password" id="popup-password">
+        <label for="popup-email">Email <small>(only to register)</small></label>
+        <input type="email" name="email" id="popup-email">
+        <label for="popup-emoji" style="text-align: center;">Emoji <small>(only to register)</small></label>
+        <input type="text" name="emoji" id="popup-emoji" maxlength="2" placeholder="👤">
+      </div>
+      <button onclick="sendUserForm()">Register / Login</button>
+    </div>
+  </div>
+  <div class="popup" data-popup="help" style="display: none;">
+    <div class="popup__box scrollBar">
+      <h3>Help</h3>
+      <div class="popup__content">
+        <p>Solve the problems</p>
+      </div>
+      <button onclick="popup('help', 'close')">Okay</button>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vanilla-router@1.2.8/index.min.js"></script>
   <script src="scripts/main.js" async></script>
 </body>
