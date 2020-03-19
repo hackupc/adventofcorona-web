@@ -74,8 +74,8 @@ router.add('about', () => {
 router.addUriListener();
 
 Promise.all([
-  fetch(`data/problem-all.json`, {
-  // fetch(`${apiBaseUrl}/problem/all`, {
+  // fetch(`data/problem-all.json`, {
+  fetch(`${apiBaseUrl}/problem/all`, {
     method: 'GET',
     headers: {
       Authentication: apiAuthToken,
@@ -87,8 +87,8 @@ Promise.all([
       problems = content.data;
       localStorage.setItem('problems', JSON.stringify(problems));
     }),
-  fetch(`data/user.json`, {
-  // fetch(`${apiBaseUrl}/user`, {
+  // fetch(`data/user.json`, {
+  fetch(`${apiBaseUrl}/user`, {
     method: 'GET',
     headers: {
       Authentication: apiAuthToken,
