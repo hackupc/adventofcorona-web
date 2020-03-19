@@ -83,10 +83,10 @@ nav::-webkit-scrollbar-thumb {
   --nav-txt: #fff;
 }
 
-.nav--problems > li.aviable {
+.nav--problems > li.available {
   --nav-txt: #fff;
 }
-.nav--problems > li:not(.aviable) > a {
+.nav--problems > li:not(.available) > a {
   cursor: not-allowed;
 }
 .nav > li.active {

@@ -183,14 +183,14 @@ function displayProblem(problemNum) {
     answerInputElem.disabled = true;
     problemTitleElem.textContent = `Problem ${problem.number}` || 'Future problem';
     let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    problemStatementElem.textContent = `Not aviable. Wait until ${new Date(problem.release_time).toLocaleTimeString('en-ES', dateOptions)}.`;
+    problemStatementElem.textContent = `Not available. Wait until ${new Date(problem.release_time).toLocaleTimeString('en-ES', dateOptions)}.`;
   }
 }
 
 function displayProblemList() {
   problemListElem.innerHTML = problems.reduce((prev, problem) => {
     let userProblem = user.solved.find(p => p.id === problem.id);
-    return `${prev}<li class="${problem.released ? 'aviable' : ''} ${userProblem ? 'done' : ''}" data-id="${problem.id}" data-number="${problem.number}"><a href="#/problem/${problem.number}" title="Problem ${problem.number}">${problem.number}</a></li>`
+    return `${prev}<li class="${problem.released ? 'available' : ''} ${userProblem ? 'done' : ''}" data-id="${problem.id}" data-number="${problem.number}"><a href="#/problem/${problem.number}" title="Problem ${problem.number}">${problem.number}</a></li>`
   }, '');
 }
 
