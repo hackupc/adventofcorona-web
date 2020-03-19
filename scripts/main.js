@@ -202,6 +202,10 @@ function displayProblemList() {
 
 
 
+const emojis = ['😎','🤠','👻','👽','🤖','🦄',
+'🦠','🐒','🐠','🐣','🦩','🏄‍♂️','💃','🧙‍♂️','🎃',
+'🧦','⚽','🤿','🕹','🍕','🍆','🌜','⛄','🦸‍♂️',
+'👩‍🍳','🐢','🦜','🦩','🐞'];
 
 async function sendUserForm() {
   let popupElem = document.querySelector('.popup[data-popup="user"]');
@@ -216,7 +220,7 @@ async function sendUserForm() {
     username: popupUsernameElem.value || undefined,
     email: popupEmailElem.value || undefined,
     password: popupPasswordElem.value || undefined,
-    emoji: popupEmojiElem.value || '🤖',
+    emoji: popupEmojiElem.value || emojis[Math.floor(Math.random()*emojis.length)],
   };
 
   let error = false;
