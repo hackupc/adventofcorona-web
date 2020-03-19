@@ -90,7 +90,7 @@ Promise.all([
   apiAuthToken ? fetch(`${apiBaseUrl}/user`, {
     method: 'GET',
     headers: {
-      Authentication: apiAuthToken,
+      Authorization: apiAuthToken,
       'Content-Type': 'application/json;charset=utf-8',
     },
   })
@@ -120,7 +120,7 @@ sendElem.addEventListener('click', event => {
   // fetch(`${apiBaseUrl}/problem/submit`, {
     method: 'POST',
     headers: {
-      Authentication: apiAuthToken,
+      Authorization: apiAuthToken,
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
@@ -287,7 +287,7 @@ async function sendUserForm() {
     let response2 = await fetch(`${apiBaseUrl}/user`, {
       method: 'GET',
       headers: {
-        Authentication: content.token,
+        Authorization: content.token,
         'Content-Type': 'application/json;charset=utf-8',
       },
     })
