@@ -362,6 +362,9 @@ button:disabled {
   max-height: calc(100% - 2rem);
   font-size: 1rem;
 }
+.popup[data-popup="help"] .popup__box{
+  width: 55rem;
+}
 .popup__box * {
   display: block;
   box-sizing: border-box;

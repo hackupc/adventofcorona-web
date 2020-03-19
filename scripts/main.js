@@ -54,7 +54,7 @@ const router = new Router({
 });
 
 router.add('/', () => {
-  router.navigateTo('/help');
+  router.navigateTo('/problem/1');
 });
 
 router.add('/help', () => {
