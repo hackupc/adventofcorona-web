@@ -1,4 +1,18 @@
 {
-  "username": "LazaruX2020",
-  "emoji": "👤"
+  "data": {
+    "username": "test",
+    "emoji": "🏄",
+    "email": "asd@asd.c",
+    "solved": [
+      {
+        "id": "5e6d6f528014a34bb49114cb",
+        "number": 1,
+        "phase": 0,
+        "time": "2020-03-17T14:01:49.973+01:00",
+        "solution": "1"
+      }
+    ],
+    "finished": false
+  },
+  "message": "ok"
 }

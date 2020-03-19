@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "5e6d6f528014a34bb49114cb",
+      "number": 1,
+      "n_phases": 1,
+      "phases": [
+        {
+          "description": "Description 1"
+        }
+      ],
+      "release_time": "2020-03-16T11:00:00+01:00",
+      "released": true
+    },
+    {
+      "id": "5e6d87098014a34bb49114cc",
+      "number": 2,
+      "n_phases": 1,
+      "phases": [
+        {
+          "description": "Description 2"
+        }
+      ],
+      "release_time": "2020-03-17T11:00:00+01:00",
+      "released": true
+    },
+    {
+      "id": "5e70bc5f3fe691296064118c",
+      "number": 3,
+      "n_phases": 0,
+      "phases": [],
+      "release_time": "2020-03-18T11:00:00+01:00",
+      "released": false
+    }
+  ],
+  "message": "ok"
+}

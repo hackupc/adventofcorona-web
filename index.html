@@ -30,7 +30,7 @@
     </div>
     <div class="answer">
       <h2>Answer</h2>
-      <textarea class="scrollBar" tabindex="1" name="answer" id="answer-imput" cols="30" rows="2"></textarea>
+      <textarea class="scrollBar" tabindex="1" name="answer" id="answer-input" cols="30" rows="2"></textarea>
       <div class="answer-row">
         <a tabindex="3" class="logo" href="https://hackersatupc.org">
           <img src="img/logo-hackersatupc.svg" alt="Hackers@UPC logo">
@@ -54,9 +54,9 @@
         <label for="popup-email">Email <small>(only to register)</small></label>
         <input type="email" name="email" id="popup-email">
         <label for="popup-emoji" style="text-align: center;">Emoji <small>(only to register)</small></label>
-        <input type="text" name="emoji" id="popup-emoji" maxlength="2" placeholder="👤">
+        <input type="text" name="emoji" id="popup-emoji" maxlength="2" placeholder="">
       </div>
-      <button onclick="sendUserForm()">Register / Login</button>
+      <button onclick="sendUserForm()" id="popup-user-send">Register / Login</button>
     </div>
   </div>
   <div class="popup" data-popup="help" style="display: none;">
