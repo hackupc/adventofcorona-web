@@ -1,7 +1,7 @@
 var currentProblemNum = 1;
 var currentProblemId = '';
 var problems = JSON.parse(localStorage.getItem('problems')) || [];
-var user = JSON.parse(localStorage.getItem('user'));
+var user = JSON.parse(localStorage.getItem('user')) || {solved:[]}
 var lastResult = {};
 const problemTitleElem = document.getElementById('problem-title');
 const problemStatementElem = document.getElementById('problem-statement');
@@ -78,7 +78,6 @@ Promise.all([
   fetch(`${apiBaseUrl}/problem/all`, {
     method: 'GET',
     headers: {
-      Authentication: apiAuthToken,
       'Content-Type': 'application/json;charset=utf-8',
     },
   })
@@ -88,7 +87,7 @@ Promise.all([
       localStorage.setItem('problems', JSON.stringify(problems));
     }),
   // fetch(`data/user.json`, {
-  fetch(`${apiBaseUrl}/user`, {
+  apiAuthToken ? fetch(`${apiBaseUrl}/user`, {
     method: 'GET',
     headers: {
       Authentication: apiAuthToken,
@@ -97,8 +96,12 @@ Promise.all([
   })
     .then(response => response.json())
     .then(content => {
-      login(apiAuthToken, content.data);
-    }),
+      if(content.error){
+        console.error('Error getting user info', content.error);
+      }else{
+        login(apiAuthToken, content.data);
+      }
+    }) : undefined,
 ]).then((values => {
   displayProblemList();
   router.navigateTo(`/problem/${currentProblemNum}`);
@@ -302,12 +305,20 @@ async function sendUserForm() {
 
 
 function login(token, userData) {
-  localStorage.setItem('apiAuthToken', token);
-  localStorage.setItem('user', JSON.stringify(userData));
-  user = userData;
+  user = {
+    username: '',
+    emoji: '👤',
+    solved: [],
+    email: '',
+    finished: false,
+    ...userData,
+  };
   apiAuthToken = token;
 
-  displayUser(userData);
+  localStorage.setItem('apiAuthToken', apiAuthToken);
+  localStorage.setItem('user', JSON.stringify(user));
+
+  displayUser(user);
 }
 
 
@@ -327,7 +338,7 @@ function popup(popupId, action = 'toggle') {
       break;
       case 'close':
         popupElem.style.display = 'none';
-        router.back();
+        router.navigateTo(`/problem/${currentProblemNum}`);
       break;
     default:
     case 'toggle':

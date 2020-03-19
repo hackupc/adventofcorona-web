@@ -46,16 +46,16 @@
   <div class="popup" data-popup="user" style="display: none;">
     <div class="popup__box scrollBar">
       <h3>Register/Login</h3>
-      <div class="popup__content">
+      <form class="popup__content">
         <label for="popup-username">Username</label>
-        <input type="text" name="username" id="popup-username">
+        <input type="text" name="username" id="popup-username" autocomplete="username">
         <label for="popup-password">Password</label>
-        <input type="password" name="password" id="popup-password">
+        <input type="password" name="password" id="popup-password" autocomplete="current-password">
         <label for="popup-email">Email <small>(only to register)</small></label>
-        <input type="email" name="email" id="popup-email">
+        <input type="email" name="email" id="popup-email" autocomplete="email">
         <label for="popup-emoji" style="text-align: center;">Emoji <small>(only to register)</small></label>
         <input type="text" name="emoji" id="popup-emoji" maxlength="2" placeholder="">
-      </div>
+      </form>
       <button onclick="sendUserForm()" id="popup-user-send">Register / Login</button>
     </div>
   </div>
