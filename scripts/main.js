@@ -108,7 +108,7 @@ Promise.all([
 }));
 displayProblemList();
 
-sendElem.addEventListener('click', event => {
+async function sendSolution(event) {
   let problem = problems.find(p => p.number === currentProblemNum);
   let userProblem = user.solved.find(p => p.number === currentProblemNum) || {phase: -1};
   if(lastResult.answer === answerInputElem.value 
@@ -116,8 +116,7 @@ sendElem.addEventListener('click', event => {
     displayResult();
     return;
   }
-  fetch(`data/problem-submit-right.json`, {
-  // fetch(`${apiBaseUrl}/problem/submit`, {
+  let response = await fetch(`${apiBaseUrl}/problem/submit`, {
     method: 'POST',
     headers: {
       Authorization: apiAuthToken,
@@ -129,23 +128,21 @@ sendElem.addEventListener('click', event => {
       phase: userProblem.phase+1,
     }),
   })
-    .then(response => response.json())
-    .then(content => {
-      lastResult = content;
-      displayResult();
-    })
-});
+  let content = await response.json();
+  lastResult = content;
+  displayResult(content);
+}
 
-function displayResult(){
+function displayResult(result=lastResult){
   feedbackElem.true.style.display = 'none';
   feedbackElem.false.style.display = 'none';
   feedbackElem.undefined.style.display = 'none';
-  switch (lastResult.isCorrect) {
+  switch (result.correct) {
     case true:
       void feedbackElem.true.offsetWidth;
       feedbackElem.true.style.display = 'block';
       let userProblem = user.solved.find(p => p.number === currentProblemNum);
-      if(userProblem) userProblem.solution = lastResult.solution;
+      if(userProblem) userProblem.solution = result.solution;
       else user.solved.push(currentProblemNum);
       document.querySelector(`.nav--problems > [data-number='${currentProblemNum}']`).classList.add('done');
     break;
@@ -196,9 +193,6 @@ function displayProblemList() {
     return `${prev}<li class="${problem.released ? 'aviable' : ''} ${userProblem ? 'done' : ''}" data-id="${problem.id}" data-number="${problem.number}"><a href="#/problem/${problem.number}" title="Problem ${problem.number}">${problem.number}</a></li>`
   }, '');
 }
-
-// TODO: Fill problem list
-
 
 
 
