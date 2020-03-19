@@ -158,7 +158,33 @@ function displayResult(result=lastResult){
 }
 
 function displayUser(user){
+  let popupElem = document.querySelector('.popup[data-popup="user"]');
+  let buttonElem = document.getElementById('popup-user-send');
+  let titleElem = document.getElementById('popup-user-title');
+  let popupUsernameElem = popupElem.querySelector('input[name="username"]');
+  // let popupEmailElem = popupElem.querySelector('input[name="email"]');
+  // let popupEmailLabelElem = popupElem.querySelector('label[for="popup-email"]');
+  let popupPasswordElem = popupElem.querySelector('input[name="password"]');
+  let popupPasswordLabelElem = popupElem.querySelector('label[for="popup-password"]');
+  let popupEmojiElem = popupElem.querySelector('input[name="emoji"]');
+  let popupEmojiLabelElem = popupElem.querySelector('label[for="popup-emoji"]');
+
+
   userEmojiElem.textContent = user.emoji;
+  buttonElem.textContent = 'Log out';
+  buttonElem.classList.add('logout');
+  buttonElem.onclick = () => {sendUserLogoutForm();};
+  titleElem.textContent = 'Account';
+  popupUsernameElem.value = user.username;
+  popupUsernameElem.disabled = true;
+  // popupEmailElem.value = user.email;
+  // popupEmailElem.disabled = true;
+  popupEmojiElem.value = user.emoji;
+  popupEmojiElem.disabled = true;
+  popupEmojiLabelElem.textContent = 'Emoji';
+  popupPasswordElem.disabled = true;
+  popupPasswordElem.style.display = 'none';
+  popupPasswordLabelElem.style.display = 'none';
 }
 
 function displayProblem(problemNum) {
@@ -195,26 +221,21 @@ function displayProblemList() {
 }
 
 
-
-const emojis = ['😎','🤠','👻','👽','🤖','🦄',
-'🦠','🐒','🐠','🐣','🦩','🏄‍♂️','💃','🧙‍♂️','🎃',
-'🧦','⚽','🤿','🕹','🍕','🍆','🌜','⛄','🦸‍♂️',
-'👩‍🍳','🐢','🦜','🦩','🐞'];
-
 async function sendUserForm() {
   let popupElem = document.querySelector('.popup[data-popup="user"]');
   let buttonElem = document.getElementById('popup-user-send');
 
   let popupUsernameElem = popupElem.querySelector('input[name="username"]');
-  let popupEmailElem = popupElem.querySelector('input[name="email"]');
+  // let popupEmailElem = popupElem.querySelector('input[name="email"]');
   let popupPasswordElem = popupElem.querySelector('input[name="password"]');
   let popupEmojiElem = popupElem.querySelector('input[name="emoji"]');
 
   let data = {
     username: popupUsernameElem.value || undefined,
-    email: popupEmailElem.value || undefined,
+    // email: popupEmailElem.value || undefined,
+    email: `${popupUsernameElem.value || 'user'}@fake.com`,
     password: popupPasswordElem.value || undefined,
-    emoji: popupEmojiElem.value || emojis[Math.floor(Math.random()*emojis.length)],
+    emoji: popupEmojiElem.value || undefined,
   };
 
   let error = false;
@@ -226,13 +247,20 @@ async function sendUserForm() {
   } else {
     popupUsernameElem.classList.remove('invalid');
   }
-  if(data.email && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email))){
+  if(data.emoji && !(/^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/.test(data.emoji))){
     error = true;
-    popupEmailElem.classList.add('invalid');
-    console.error('Invalid email');
+    popupEmojiElem.classList.add('invalid');
+    console.error('Invalid emoji');
   } else {
-    popupEmailElem.classList.remove('invalid');
+    popupEmojiElem.classList.remove('invalid');
   }
+  // if(data.email && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email))){
+  //   error = true;
+  //   popupEmailElem.classList.add('invalid');
+  //   console.error('Invalid email');
+  // } else {
+  //   popupEmailElem.classList.remove('invalid');
+  // }
   if(!data.password){
     error = true;
     popupPasswordElem.classList.add('invalid');
@@ -249,7 +277,7 @@ async function sendUserForm() {
     return;
   }
 
-  if(data.email){
+  if(data.emoji){
     let response = await fetch(`${apiBaseUrl}/user/register`, {
       method: 'POST',
       headers: {
@@ -263,7 +291,7 @@ async function sendUserForm() {
       login(content.token, {
         username: data.username,
         emoji: data.emoji,
-        email: data.email,
+        // email: data.email,
       });
       popup('user', 'close');
       return;
@@ -278,7 +306,7 @@ async function sendUserForm() {
     },
     body: JSON.stringify(data),
   })
-  // debugger
+  
   if (response.ok) { 
     let content = await response.json();
 
@@ -296,7 +324,7 @@ async function sendUserForm() {
     popup('user', 'close');
   } else {
     error = true;
-    popupEmailElem.classList.add('invalid');
+    popupEmojiElem.classList.add('invalid');
     console.error('Unregistered user');
     buttonElem.style.display = 'none';
     buttonElem.style.animation = 'shake 0.4s linear';
@@ -307,6 +335,32 @@ async function sendUserForm() {
   }
 }
 
+async function sendUserLogoutForm(){
+  let response = await fetch(`${apiBaseUrl}/user/logout`, {
+    method: 'POST',
+    headers: {
+      Authorization: apiAuthToken,
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  })
+  
+  if (response.ok) { 
+    localStorage.removeItem('user');
+    localStorage.removeItem('apiAuthToken');
+
+    window.location = '/';
+  } else {
+    error = true;
+    console.error('Cant logout');
+    let buttonElem = document.getElementById('popup-user-send');
+    buttonElem.style.display = 'none';
+    buttonElem.style.animation = 'shake 0.4s linear';
+    void buttonElem.offsetWidth;
+    buttonElem.style.display = 'block';
+    setTimeout(() => {buttonElem.style.animation = ''}, 400);
+  }
+}
+
 
 
 function login(token, userData) {
@@ -314,7 +368,7 @@ function login(token, userData) {
     username: '',
     emoji: '👤',
     solved: [],
-    email: '',
+    // email: '',
     finished: false,
     ...userData,
   };
