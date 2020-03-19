@@ -283,11 +283,18 @@ async function sendUserForm() {
   // debugger
   if (response.ok) { 
     let content = await response.json();
-    login(content.token, {
-      username: data.username,
-      emoji: data.emoji,
-      email: data.email,
+
+    let response2 = await fetch(`${apiBaseUrl}/user`, {
+      method: 'GET',
+      headers: {
+        Authentication: content.token,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
     })
+    let content2 = await response2.json();
+
+    login(content.token, content2.data);
+
     popup('user', 'close');
   } else {
     error = true;
