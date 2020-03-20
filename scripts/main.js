@@ -237,6 +237,7 @@ async function sendUserForm() {
   // let popupEmailElem = popupElem.querySelector('input[name="email"]');
   let popupPasswordElem = popupElem.querySelector('input[name="password"]');
   let popupEmojiElem = popupElem.querySelector('input[name="emoji"]');
+  let popupCheckboxElem = popupElem.querySelector('#popup-checkbox');
 
   let data = {
     username: popupUsernameElem.value || undefined,
@@ -275,6 +276,13 @@ async function sendUserForm() {
     console.error('Invalid password');
   } else {
     popupPasswordElem.classList.remove('invalid');
+  }
+  if(!data.checkbox){
+    error = true;
+    popupCheckboxElem.classList.add('invalid');
+    console.error('Accept legal notice');
+  } else {
+    popupCheckboxElem.classList.remove('invalid');
   }
   if(error){
     buttonElem.style.display = 'none';
