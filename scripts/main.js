@@ -189,7 +189,7 @@ function displayUser(user){
   // popupEmailElem.disabled = true;
   popupEmojiElem.value = user.emoji;
   popupEmojiElem.disabled = true;
-  popupEmojiLabelElem.textContent = 'Emoji';
+  popupEmojiLabelElem.textContent = 'Favorite Emoji';
   popupPasswordElem.disabled = true;
   popupPasswordElem.style.display = 'none';
   popupPasswordLabelElem.style.display = 'none';
