@@ -19,6 +19,10 @@ body {
   font-family: monospace;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 ::selection{
   background-color: var(--focus-color);
   color: #000;
@@ -154,7 +158,6 @@ main {
 .problem {
   min-height: 10rem;
   overflow: auto;
-  scroll-behavior: smooth;
 }
 
 .logo{
@@ -194,15 +197,16 @@ main {
   opacity: 0.333;
   cursor: not-allowed;
 }
-.scrollBar::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.25rem;
+  height: 0.25rem;
 	background-color: #F5F5F5;
 }
-.scrollBar::-webkit-scrollbar-track,
-.scrollBar::-webkit-scrollbar-corner{
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner{
 	background-color: #000;
 }
-.scrollBar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background-color: #ddd;	
 }
 
@@ -412,5 +416,6 @@ button:disabled {
   border-color: red;
 }
 .popup__content {
-
+  max-height: calc(100vh - 12rem);
+  overflow: auto;
 }
