@@ -156,8 +156,8 @@ function displayResult(message='error'){
 
   if (message === 'right-answer') {
     let userProblem = user.solved.find(p => p.number === currentProblemNum);
-    if(userProblem) userProblem.solution = result.solution;
-    else user.solved.push(currentProblemNum);
+    if(userProblem) userProblem = lastResult.solved;
+    else user.solved.push(lastResult.solved);
     displayProblem();
     displayProblemList();
     problemStatementElem.scrollTop = problemStatementElem.scrollHeight;
@@ -197,7 +197,7 @@ function displayUser(user){
   popupCheckboxElem.style.display = 'none';
 }
 
-function displayProblem(problemNum) {
+function displayProblem(problemNum=currentProblemNum) {
   currentProblemNum = parseInt(problemNum);
   let problem = problems.find(p => p.number === currentProblemNum);
   let userProblem = user.solved.find(p => p.id === problem.id) || {phase:-1};

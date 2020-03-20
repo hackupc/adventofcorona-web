@@ -152,7 +152,7 @@ nav::-webkit-scrollbar-thumb {
 .main {
   padding: 2rem;
   display: grid;
-  grid-template: 2fr 0 1fr / auto;
+  grid-template: 2fr 1fr / auto;
   height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   position: relative;
@@ -160,9 +160,15 @@ nav::-webkit-scrollbar-thumb {
 }
 
 .problem {
+  display: flex;
+  flex-direction: column;
   min-height: 10rem;
+}
+
+#problem-statement {
   overflow: auto;
   padding-bottom: 0.5rem;
+  flex-grow: 1;
 }
 
 .logo{
@@ -496,6 +502,13 @@ button:disabled {
   width: 100%;
   height: 2rem;
   background: linear-gradient(to bottom, transparent, var(--bg));
+}
+.fade--down::before {
+  top: 0;
+  background: linear-gradient(to top, transparent, var(--bg));
+}
+.fade--small::before{
+  height: 1.5rem;
 }
 .popup__content--login {
   overflow: visible;
