@@ -1,37 +1,58 @@
 {
-  "data": [
+  "data":[
     {
-      "id": "5e6d6f528014a34bb49114cb",
-      "number": 1,
-      "n_phases": 1,
-      "phases": [
+      "id":"5e6d6f528014a34bb49114cb",
+      "number":1,
+      "n_phases":2,
+      "phases":[
         {
-          "description": "Description 1"
+          "description":"\u003cp\u003eCollect stars by solving puzzles.  Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first.  Each puzzle grants \u003cem class=\"star\"\u003eone star\u003c/em\u003e. Good luck!\u003c/p\u003e \u003cp\u003eThe Elves quickly load you into a spacecraft and prepare to launch.\u003c/p\u003e \u003cp\u003eAt the first Go / No Go poll, every Elf is Go until the Fuel Counter-Upper.  They haven't determined the amount of fuel required yet.\u003c/p\u003e \u003cp\u003eFuel required to launch a given \u003cem\u003emodule\u003c/em\u003e is based on its \u003cem\u003emass\u003c/em\u003e.  Specifically, to find the fuel required for a module, take its mass, divide by three, round down, and subtract 2.\u003c/p\u003e \u003cp\u003eFor example:\u003c/p\u003e \u003cul\u003e \u003cli\u003eFor a mass of \u003ccode\u003e12\u003c/code\u003e, divide by 3 and round down to get \u003ccode\u003e4\u003c/code\u003e, then subtract 2 to get \u003ccode\u003e2\u003c/code\u003e.\u003c/li\u003e \u003cli\u003eFor a mass of \u003ccode\u003e14\u003c/code\u003e, dividing by 3 and rounding down still yields \u003ccode\u003e4\u003c/code\u003e, so the fuel required is also \u003ccode\u003e2\u003c/code\u003e.\u003c/li\u003e \u003cli\u003eFor a mass of \u003ccode\u003e1969\u003c/code\u003e, the fuel required is \u003ccode\u003e654\u003c/code\u003e.\u003c/li\u003e \u003cli\u003eFor a mass of \u003ccode\u003e100756\u003c/code\u003e, the fuel required is \u003ccode\u003e33583\u003c/code\u003e.\u003c/li\u003e \u003c/ul\u003e \u003cp\u003eThe Fuel Counter-Upper needs to know the total fuel requirement.  To find it, individually calculate the fuel needed for the mass of each module (your puzzle input), then add together all the fuel values.\u003c/p\u003e \u003cp\u003e\u003cem\u003eWhat is the sum of the fuel requirements\u003c/em\u003e for all of the modules on your spacecraft?\u003c/p\u003e  \u003cp\u003eYour puzzle answer was \u003ccode\u003e3511949\u003c/code\u003e.\u003c/p\u003e"
+        },
+        {
+          "description":" \u003cp\u003eIt's a new game for the ship's \u003ca href=\"https://en.wikipedia.org/wiki/Arcade_cabinet\"\u003earcade cabinet\u003c/a\u003e! Unfortunately, the arcade is \u003cem\u003eall the way\u003c/em\u003e on the other end of the ship. Surely, it won't be hard to build your own - the care package even comes with schematics.\u003c/p\u003e \u003cp\u003eThe arcade cabinet runs \u003ca href=\"9\"\u003eIntcode\u003c/a\u003e software like the game the Elves sent (your puzzle input). It has a primitive screen capable of drawing square \u003cem\u003etiles\u003c/em\u003e on a grid.  The software draws tiles to the screen with output instructions: every three output instructions specify the \u003ccode\u003ex\u003c/code\u003e position (distance from the left), \u003ccode\u003ey\u003c/code\u003e position (distance from the top), and \u003ccode\u003etile id\u003c/code\u003e. The \u003ccode\u003etile id\u003c/code\u003e is interpreted as follows:\u003c/p\u003e \u003cul\u003e \u003cli\u003e\u003ccode\u003e0\u003c/code\u003e is an \u003cem\u003eempty\u003c/em\u003e tile.  No game object appears in this tile.\u003c/li\u003e \u003cli\u003e\u003ccode\u003e1\u003c/code\u003e is a \u003cem\u003ewall\u003c/em\u003e tile.  Walls are indestructible barriers.\u003c/li\u003e \u003cli\u003e\u003ccode\u003e2\u003c/code\u003e is a \u003cem\u003eblock\u003c/em\u003e tile.  Blocks can be broken by the ball.\u003c/li\u003e \u003cli\u003e\u003ccode\u003e3\u003c/code\u003e is a \u003cem\u003ehorizontal paddle\u003c/em\u003e tile.  The paddle is indestructible.\u003c/li\u003e \u003cli\u003e\u003ccode\u003e4\u003c/code\u003e is a \u003cem\u003eball\u003c/em\u003e tile.  The ball moves diagonally and bounces off objects.\u003c/li\u003e \u003c/ul\u003e \u003cp\u003eFor example, a sequence of output values like \u003ccode\u003e1,2,3,6,5,4\u003c/code\u003e would draw a \u003cem\u003ehorizontal paddle\u003c/em\u003e tile (\u003ccode\u003e1\u003c/code\u003e tile from the left and \u003ccode\u003e2\u003c/code\u003e tiles from the top) and a \u003cem\u003eball\u003c/em\u003e tile (\u003ccode\u003e6\u003c/code\u003e tiles from the left and \u003ccode\u003e5\u003c/code\u003e tiles from the top).\u003c/p\u003e"
         }
       ],
-      "release_time": "2020-03-16T11:00:00+01:00",
-      "released": true
+      "release_time":"2020-03-18T12:00:00Z",
+      "released":true,
+      "stats":3
     },
     {
-      "id": "5e6d87098014a34bb49114cc",
-      "number": 2,
-      "n_phases": 1,
-      "phases": [
+      "id":"5e6d87098014a34bb49114cc",
+      "number":2,
+      "n_phases":1,
+      "phases":[
         {
-          "description": "Description 2"
+          "description":"Description 2"
         }
       ],
-      "release_time": "2020-03-17T11:00:00+01:00",
-      "released": true
+      "release_time":"2020-03-19T12:00:00Z",
+      "released":true,
+      "stats":3
     },
     {
-      "id": "5e70bc5f3fe691296064118c",
-      "number": 3,
-      "n_phases": 0,
-      "phases": [],
-      "release_time": "2020-03-18T11:00:00+01:00",
-      "released": false
+      "id":"5e70bc5f3fe691296064118c",
+      "number":3,
+      "n_phases":1,
+      "phases":[
+        {
+          "description":"Description 3"
+        }
+      ],
+      "release_time":"2020-03-19T20:56:00Z",
+      "released":true,
+      "stats":7
+    },
+    {
+      "id":"5e70d7753fe691296064118d",
+      "number":4,
+      "n_phases":0,
+      "phases":[
+
+      ],
+      "release_time":"2020-03-21T12:00:00Z",
+      "released":false,
+      "stats":0
     }
   ],
-  "message": "ok"
+  "message":"ok"
 }

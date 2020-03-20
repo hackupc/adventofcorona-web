@@ -1,18 +1,20 @@
 {
-  "data": {
-    "username": "test",
-    "emoji": "🏄",
-    "email": "asd@asd.c",
-    "solved": [
+  "data":{
+    "username":"mauri",
+    "email":"hello@mauriciabad.com",
+    "emoji":"👽",
+    "solved":[
       {
-        "id": "5e6d6f528014a34bb49114cb",
-        "number": 1,
-        "phase": 0,
-        "time": "2020-03-17T14:01:49.973+01:00",
-        "solution": "1"
+        "id":"5e6d6f528014a34bb49114cb",
+        "number":1,
+        "phase":0,
+        "time":"2020-03-20T09:27:43.143Z",
+        "solution":"1",
+        "score":0.0039009441110682275
       }
     ],
-    "finished": false
+    "finished":false,
+    "score":0.0039009441110682275
   },
-  "message": "ok"
+  "message":"ok"
 }
