@@ -265,9 +265,10 @@ button:disabled {
 }
 
 .grow { flex-grow: 1; display: inline-block !important; }
-#feedback-true { color: #7bee8e; animation: heartBeat 1.3s ease-in-out; }
-#feedback-false { color: #ee7b8b; animation: shake 0.4s linear; }
-#feedback-undefined { color: #cccccc; animation: flash 1s linear; }
+#feedback[data-message="right-answer"] { color: #7bee8e; animation: heartBeat 1.3s ease-in-out; }
+#feedback[data-message="wrong-answer"] { color: #ee7b8b; animation: shake 0.4s linear; }
+#feedback[data-message="error"],
+#feedback[data-message="require-login"] { color: #cccccc; animation: flash 1s linear; }
 
 @keyframes heartBeat {
   0%  { transform: scale(1); }
@@ -345,6 +346,20 @@ button:disabled {
   }
 }
 
+@keyframes fade-in {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes slide-up {
+  0% {transform: translateY(2rem);}
+  100% {transform: translateY(0);}
+}
+.popup--hiden {
+  opacity: 0;
+}
+.popup--hiden > .popup__box {
+  transform: translateY(2rem);
+}
 .popup {
   position: absolute;
   top: 0;
@@ -357,6 +372,9 @@ button:disabled {
   backdrop-filter: blur(8px);
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.1);
+  animation: fade-in 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: opacity 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
 }
 .popup__box {
   background: var(--bg);
@@ -369,6 +387,8 @@ button:disabled {
   overflow: auto;
   max-height: calc(100% - 2rem);
   font-size: 1rem;
+  animation: slide-up 100ms var(--ease-bounce);
+  transition: transform 100ms var(--ease-bounce);
 }
 .popup[data-popup="help"] .popup__box{
   width: 55rem;

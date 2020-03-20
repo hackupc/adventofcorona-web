@@ -6,16 +6,19 @@ var lastResult = {};
 const problemTitleElem = document.getElementById('problem-title');
 const problemStatementElem = document.getElementById('problem-statement');
 const answerInputElem = document.getElementById('answer-input');
-const feedbackElem = {
-  true: document.getElementById('feedback-true'),
-  false: document.getElementById('feedback-false'),
-  undefined: document.getElementById('feedback-undefined'),
-}
+const feedbackElem = document.getElementById('feedback');
 const problemListElem = document.getElementsByClassName('nav--problems')[0];
 const sendElem = document.getElementById('send-button');
 const userEmojiElem = document.getElementById('user-emoji');
 
+const feedbackMessages = {
+  'right-answer': 'Yay! Right answer 🥳',
+  'wrong-answer': 'Ops... Wrong answer 🤒',
+  'error': 'Error evaluating your answer, try later 😵',
+  'require-login': 'Log in to send your answer 🙄',
+};
 const apiBaseUrl = 'https://corona-2w3jqbocga-ew.a.run.app';
+// const apiBaseUrl = 'https://dev-2w3jqbocga-ew.a.run.app/';
 var apiAuthToken = localStorage.getItem('apiAuthToken');
 if(apiAuthToken && user) login(apiAuthToken, user);
 
@@ -58,11 +61,11 @@ router.add('/', () => {
 });
 
 router.add('/help', () => {
-  popup('help', 'open')
+  popup('help', 'open');
 });
 
 router.add('/login', () => {
-  popup('user', 'open')
+  popup('user', 'open');
 });
 
 router.add('/problem/(:num)', displayProblem);
@@ -109,11 +112,20 @@ Promise.all([
 displayProblemList();
 
 async function sendSolution(event) {
+  if(!apiAuthToken) {
+    displayResult('require-login');
+    setTimeout(() => {
+      popup('user', 'open');
+    }, 1500);
+    return;
+  }
+
   let problem = problems.find(p => p.number === currentProblemNum);
   let userProblem = user.solved.find(p => p.number === currentProblemNum) || {phase: -1};
   if(lastResult.answer === answerInputElem.value 
     && lastResult.problem === problem.id) {
-    displayResult();
+      let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
+      displayResult(feedbackMessage);
     return;
   }
   let response = await fetch(`${apiBaseUrl}/problem/submit`, {
@@ -128,32 +140,27 @@ async function sendSolution(event) {
       phase: userProblem.phase+1,
     }),
   })
-  let content = await response.json();
-  lastResult = content;
-  displayResult(content);
+  lastResult = await response.json();
+  
+  let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
+  displayResult(feedbackMessage);
 }
 
-function displayResult(result=lastResult){
-  feedbackElem.true.style.display = 'none';
-  feedbackElem.false.style.display = 'none';
-  feedbackElem.undefined.style.display = 'none';
-  switch (result.correct) {
-    case true:
-      void feedbackElem.true.offsetWidth;
-      feedbackElem.true.style.display = 'block';
-      let userProblem = user.solved.find(p => p.number === currentProblemNum);
-      if(userProblem) userProblem.solution = result.solution;
-      else user.solved.push(currentProblemNum);
-      document.querySelector(`.nav--problems > [data-number='${currentProblemNum}']`).classList.add('done');
-    break;
-    case false:
-      void feedbackElem.false.offsetWidth;
-      feedbackElem.false.style.display = 'block';
-      break;
-    default:
-      void feedbackElem.undefined.offsetWidth;
-      feedbackElem.undefined.style.display = 'block';
-    break;
+function displayResult(message='error'){
+  const feedbackMessage = feedbackMessages[message] || feedbackMessages.error;
+  feedbackElem.style.display = 'none';
+  feedbackElem.textContent = feedbackMessage;
+  feedbackElem.dataset.message = message;
+  void feedbackElem.offsetWidth;
+  feedbackElem.style.display = 'block';
+
+  if (message === 'right-answer') {
+    let userProblem = user.solved.find(p => p.number === currentProblemNum);
+    if(userProblem) userProblem.solution = result.solution;
+    else user.solved.push(currentProblemNum);
+    displayProblem();
+    displayProblemList();
+    problemStatementElem.scrollTop = problemStatementElem.scrollHeight;
   }
 }
 
@@ -195,9 +202,7 @@ function displayProblem(problemNum) {
   let problem = problems.find(p => p.number === currentProblemNum);
   let userProblem = user.solved.find(p => p.id === problem.id) || {phase:-1};
   answerInputElem.value = userProblem.solution || '';
-  feedbackElem.true.style.display = 'none';
-  feedbackElem.false.style.display = 'none';
-  feedbackElem.undefined.style.display = 'none';
+  feedbackElem.style.display = 'none';
   let elem = document.querySelector('.nav--problems > .active')
   if(elem) elem.classList.remove('active');
 
@@ -399,7 +404,11 @@ function popup(popupId, action = 'toggle') {
       popupElem.style.display = 'flex';
       break;
       case 'close':
-        popupElem.style.display = 'none';
+        popupElem.classList.add('popup--hiden');
+        setTimeout(() => {
+          popupElem.style.display = 'none';
+          popupElem.classList.remove('popup--hiden');
+        }, 200);
         router.navigateTo(`/problem/${currentProblemNum}`);
       break;
     default:
