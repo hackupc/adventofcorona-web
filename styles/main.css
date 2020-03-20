@@ -396,7 +396,8 @@ button:disabled {
 .popup__box input,
 .popup__box label,
 .popup__box button,
-.popup__box form {
+.popup__box small,
+.popup__box span {
   display: block;
   box-sizing: border-box;
 }
@@ -430,6 +431,9 @@ button:disabled {
   font-size: inherit;
   margin: 1rem 0 0.25rem;
   line-height: 1;
+}
+.popup__box small {
+  margin-top: 0.25rem;
 }
 .popup__box input {
   font-size: inherit;
