@@ -149,7 +149,7 @@ nav::-webkit-scrollbar-thumb {
   box-shadow: 0 0 0 0.2rem var(--focus-color);
 }
 
-main {
+.main {
   padding: 2rem;
   display: grid;
   grid-template: 2fr 0 1fr / auto;
@@ -469,6 +469,11 @@ button:disabled {
 }
 .popup__box input.invalid{
   border-color: red;
+}
+.popup__box .highlight{
+  border-radius: 0.5rem;
+  background-color: #000;
+  padding: 1rem;
 }
 .popup__content {
   max-height: calc(100vh - 12rem);
