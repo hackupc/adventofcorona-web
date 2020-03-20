@@ -23,6 +23,10 @@ body {
   scroll-behavior: smooth;
 }
 
+a {
+  color: var(--accent);
+}
+
 ::selection{
   background-color: var(--focus-color);
   color: #000;
@@ -148,7 +152,7 @@ nav::-webkit-scrollbar-thumb {
 main {
   padding: 2rem;
   display: grid;
-  grid-template: 2fr 1fr / auto;
+  grid-template: 2fr 0 1fr / auto;
   height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   position: relative;
@@ -158,6 +162,7 @@ main {
 .problem {
   min-height: 10rem;
   overflow: auto;
+  padding-bottom: 0.5rem;
 }
 
 .logo{
@@ -368,7 +373,10 @@ button:disabled {
 .popup[data-popup="help"] .popup__box{
   width: 55rem;
 }
-.popup__box * {
+.popup__box input,
+.popup__box label,
+.popup__box button,
+.popup__box form {
   display: block;
   box-sizing: border-box;
 }
@@ -376,6 +384,27 @@ button:disabled {
   margin: 0rem 0 1.25rem;
   font-size: 1.5rem;
   text-align: center;
+}
+.popup__box h4:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+.popup__box h4 {
+  margin: 0;
+  padding: 1rem 0 0.25rem;
+  font-size: 1.333rem;
+  position: relative;
+}
+.popup__box h4::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0.1rem;
+  background-color: currentColor;
+  opacity: 0.33;
 }
 .popup__box label {
   font-size: inherit;
@@ -418,4 +447,25 @@ button:disabled {
 .popup__content {
   max-height: calc(100vh - 12rem);
   overflow: auto;
+}
+.popup__content--help {
+  padding-bottom: 0.5rem;
+}
+.fade {
+  position: relative;
+  width: 100%;
+}
+.fade::before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 2rem;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+.popup__content--login {
+  overflow: visible;
 }

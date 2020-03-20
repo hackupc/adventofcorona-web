@@ -36,7 +36,6 @@
 	margin: 0;
 }
 .cookie-notice__link {
-	color: var(--accent);
 	white-space: nowrap;
 }
 

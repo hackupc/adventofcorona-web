@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/cookies.css">
+  <link rel="stylesheet" href="styles/checkbox.css">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <title>Adventure of Corona | Hackers@UPC</title>
   <link rel="canonical" href="http://adventofcorona.hackersatupc.org/">
@@ -40,6 +41,7 @@
       <h1 id="problem-title"></h1>
       <div id="problem-statement"></div>
     </div>
+    <div class="fade"></div>
     <div class="answer">
       <h2>Answer</h2>
       <textarea tabindex="1" name="answer" id="answer-input" cols="30" rows="2"></textarea>
@@ -58,15 +60,26 @@
   <div class="popup" data-popup="user" style="display: none;">
     <div class="popup__box">
       <h3 id="popup-user-title">Register/Login</h3>
-      <form class="popup__content">
+      <form class="popup__content popup__content--login">
         <label for="popup-username">Username</label>
         <input type="text" name="username" id="popup-username" autocomplete="username">
         <label for="popup-password">Password</label>
-        <input type="password" name="password" id="popup-password" autocomplete="current-password">
+        <input type="password" name="password" id="popup-password" autocomplete="current-password" onkeypress="if(event.key === 'Enter') sendUserForm();">
         <!-- <label for="popup-email">Email <small>(only to register)</small></label> -->
         <!-- <input type="email" name="email" id="popup-email" autocomplete="email"> -->
         <label for="popup-emoji" style="text-align: center;">Emoji <small>(only to register)</small></label>
         <input type="text" name="emoji" id="popup-emoji" maxlength="8" placeholder="">
+        <div class="popup__checkbox">
+          <input class="inp-cbx" id="popup-checkbox" type="checkbox"/>
+          <label class="cbx" for="popup-checkbox" role="checkbox">
+            <span>
+              <svg width="12px" height="10px" viewbox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <span>I accept the <a href="/docs/legal_notice.pdf">Legal notice</a></span>
+          </label>
+        </div>
       </form>
       <button onclick="sendUserForm()" id="popup-user-send">Register / Login</button>
     </div>
@@ -74,7 +87,7 @@
   <div class="popup" data-popup="help" style="display: none;">
     <div class="popup__box">
       <h3>Help</h3>
-      <div class="popup__content">
+      <div class="popup__content popup__content--help">
         <h4>TL;DR;</h4>
         <p>It’s like advent of code but during the COVID-19 confinement. Every day at 12AM UTC.</p>
         <br>
@@ -87,7 +100,10 @@
         <p>#istayathome</p>
         <h4>ABOUT US</h4>
         <p>Hackers@UPC is a non-profit student organization at Universitat Politècnica de Catalunya. We organize events during the year, nationally and internationally, to promote science and technology among students and create a great community in the technological world. Our mission is to foster learning, designing, and building in order to turn student's ideas into a reality!</p>
+        <h4>LEGAL STUFF</h4>
+        <p>Check our <a href="/docs/legal_notice.pdf">Legal notice</a> and <a href="/docs/privacy_and_cookies.pdf">Privacy and cookies policy</a>.</p>
       </div>
+      <div class="fade"></div>
       <button onclick="popup('help', 'close')">Okay</button>
     </div>
   </div>

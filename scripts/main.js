@@ -168,6 +168,7 @@ function displayUser(user){
   let popupPasswordLabelElem = popupElem.querySelector('label[for="popup-password"]');
   let popupEmojiElem = popupElem.querySelector('input[name="emoji"]');
   let popupEmojiLabelElem = popupElem.querySelector('label[for="popup-emoji"]');
+  let popupCheckboxElem = popupElem.querySelector('.popup__checkbox');
 
 
   userEmojiElem.textContent = user.emoji;
@@ -185,6 +186,8 @@ function displayUser(user){
   popupPasswordElem.disabled = true;
   popupPasswordElem.style.display = 'none';
   popupPasswordLabelElem.style.display = 'none';
+  popupCheckboxElem.disabled = true;
+  popupCheckboxElem.style.display = 'none';
 }
 
 function displayProblem(problemNum) {
