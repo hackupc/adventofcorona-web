@@ -277,7 +277,7 @@ async function sendUserForm() {
   } else {
     popupPasswordElem.classList.remove('invalid');
   }
-  if(!data.checkbox){
+  if(!popupCheckboxElem.checked){
     error = true;
     popupCheckboxElem.classList.add('invalid');
     console.error('Accept legal notice');
