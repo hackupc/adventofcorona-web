@@ -302,9 +302,8 @@ button:disabled {
 }
 .bg-logo {
   width: 50rem;
-  margin-right: -13%;
   margin-bottom: 10%;
-  max-width: 100%;
+  max-width: calc(100% - 4rem);
   max-height: 33%;
   display: none;
 }
