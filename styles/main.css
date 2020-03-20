@@ -247,7 +247,8 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.answer-row > a {
+.answer-row > a,
+.popup a {
   transition: box-shadow 200ms var(--ease-bounce);
   box-shadow: 0 0 0 0 var(--focus-color);
   border-radius: 0.5rem;
@@ -255,7 +256,8 @@ button:disabled {
   margin: -0.5rem;
   outline: none;
 }
-.answer-row > a:focus {
+.answer-row > a:focus,
+.popup a:focus {
   box-shadow: 0 0 0 0.2rem var(--focus-color);
 }
 .answer-row > span {
