@@ -17,8 +17,8 @@ const feedbackMessages = {
   'error': 'Error evaluating your answer, try later 😵',
   'require-login': 'Log in to send your answer 🙄',
 };
-const apiBaseUrl = 'https://corona-2w3jqbocga-ew.a.run.app';
-// const apiBaseUrl = 'https://dev-2w3jqbocga-ew.a.run.app/';
+const apiBaseUrl = 'https://corona-2w3jqbocga-ew.a.run.app'; // Production
+// const apiBaseUrl = 'https://dev-2w3jqbocga-ew.a.run.app/'; // Development
 var apiAuthToken = localStorage.getItem('apiAuthToken');
 if(apiAuthToken && user) login(apiAuthToken, user);
 
@@ -211,7 +211,9 @@ function displayProblem(problemNum) {
     sendElem.disabled = false;
     answerInputElem.disabled = false;
     problemTitleElem.textContent = `Problem ${problem.number}`;
-    problemStatementElem.innerHTML = problem.phases.reduce((total, phase, i) => `${total}<h2>${ i<=userProblem.phase ? '✅ ' : '❌ '}Phase ${i+1}</h2><p>${phase.description}</p>`, '');
+    problemStatementElem.innerHTML = problem.phases
+      .filter((phase, i) => i <= userProblem.phase + 1)
+      .reduce((total, phase, i) => `${total}<h2>${ i<=userProblem.phase ? '✅ ' : '❌ '}Phase ${i+1}</h2><p>${phase.description}</p>`, '');
   }else {
     sendElem.disabled = true;
     answerInputElem.disabled = true;
@@ -277,13 +279,6 @@ async function sendUserForm() {
   } else {
     popupPasswordElem.classList.remove('invalid');
   }
-  if(!popupCheckboxElem.checked){
-    error = true;
-    popupCheckboxElem.classList.add('invalid');
-    console.error('Accept legal notice');
-  } else {
-    popupCheckboxElem.classList.remove('invalid');
-  }
   if(error){
     buttonElem.style.display = 'none';
     buttonElem.style.animation = 'shake 0.4s linear';
@@ -293,7 +288,7 @@ async function sendUserForm() {
     return;
   }
 
-  if(data.emoji){
+  if(data.emoji && popupCheckboxElem.checked){
     let response = await fetch(`${apiBaseUrl}/user/register`, {
       method: 'POST',
       headers: {
@@ -341,6 +336,7 @@ async function sendUserForm() {
   } else {
     error = true;
     popupEmojiElem.classList.add('invalid');
+    popupCheckboxElem.classList.add('invalid');
     console.error('Unregistered user');
     buttonElem.style.display = 'none';
     buttonElem.style.animation = 'shake 0.4s linear';
