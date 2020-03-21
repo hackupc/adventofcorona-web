@@ -499,7 +499,7 @@ button:disabled {
   padding: 1rem;
 }
 .popup__checkbox {
-  margin-bottom: 8px;
+  margin: 0 0 1.1rem 1.1rem;
 }
 .popup__content {
   overflow: auto;
