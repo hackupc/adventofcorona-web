@@ -38,7 +38,7 @@ shareButton.addEventListener('click', event => {
   if (navigator.share) {
     navigator.share({
       title: document.title,
-      url: window.location,
+      url: document.querySelector('link[rel="canonical"]').href,
       text: `Check this out. ${document.querySelector('meta[name="description"]').content}`,
     })
     .catch(console.error);
