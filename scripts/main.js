@@ -263,7 +263,9 @@ async function sendUserForm() {
   } else {
     popupUsernameElem.classList.remove('invalid');
   }
-  if(data.emoji && !(/^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/.test(data.emoji))){
+  if(data.emoji && 
+    !((/^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])$/.test(data.emoji))
+      || (/^[🇦-🇿]{2}$/u.test(data.emoji)))){
     error = true;
     popupEmojiElem.classList.add('invalid');
     console.error('Invalid emoji');
