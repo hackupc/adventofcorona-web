@@ -224,7 +224,11 @@ function displayProblem(problemNum=currentProblemNum) {
     answerInputElem.disabled = true;
     problemTitleElem.textContent = `Problem ${problem.number}` || 'Future problem';
     let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    problemStatementElem.textContent = `Not available. Wait until ${new Date(problem.release_time).toLocaleTimeString('en-ES', dateOptions)}.`;
+    let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let locale = Intl.DateTimeFormat().resolvedOptions().locale;    
+    problemStatementElem.textContent = `Not available yet. Come back ${
+      moment(problem.release_time).tz(timezone).locale('en'+locale.slice(2)).calendar(null, {sameElse: 'LLLL'})
+    }`;
   }
 }
 
