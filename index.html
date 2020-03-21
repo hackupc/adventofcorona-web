@@ -44,15 +44,15 @@
       <div class="fade fade--small"></div>
     </div>
     <div class="answer">
-      <h2>Answer</h2>
-      <textarea tabindex="1" name="answer" id="answer-input" cols="30" rows="2"></textarea>
+      <h2><label for="answer-input">Answer</label></h2>
+      <textarea name="answer" id="answer-input" cols="30" rows="2"></textarea>
       <div class="answer-row">
-        <a tabindex="3" class="logo" href="https://hackersatupc.org">
+        <a class="logo" href="https://hackersatupc.org">
           <img src="img/logo-hackersatupc.svg" alt="Hackers@UPC logo">
         </a>
         <span class="grow"></span>
         <span id="feedback" data-message="error"></span>
-        <button tabindex="2" id="send-button" onclick="sendSolution(event);">Send</button>
+        <button id="send-button" onclick="sendSolution(event);">Send</button>
       </div>
     </div>
   </div>
