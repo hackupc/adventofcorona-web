@@ -11,7 +11,7 @@
 
 body {
   display: grid;
-  grid-template: auto / 5rem auto 18rem;
+  grid-template: auto / 5rem auto 16rem;
   margin: 0;
   height: calc(var(--vh, 1vh) * 100);
   background: var(--bg);
@@ -569,7 +569,7 @@ button:disabled {
 }
 .ranking__content li > span:nth-child(1) { width: 1rem; text-align: center; }
 .ranking__content li > span:nth-child(2) { width: 7rem; }
-.ranking__content li > span:nth-child(3) { width: 5.5rem; text-align: right; }
+.ranking__content li > span:nth-child(3) { width: 3.5rem; text-align: right; }
 /* .ranking__content li > span:nth-child(4) { width: 3.5rem; text-align: right; } */
 .ranking__content li > span:last-child { margin-right: 0; }
 
