@@ -121,7 +121,6 @@ async function sendSolution(event) {
   }
 
   let problem = problems.find(p => p.number === currentProblemNum);
-  let userProblem = user.solved.find(p => p.number === currentProblemNum) || {phase: -1};
   if(lastResult.answer === answerInputElem.value 
     && lastResult.problem === problem.id) {
       let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
@@ -137,7 +136,7 @@ async function sendSolution(event) {
     body: JSON.stringify({
       submission: answerInputElem.value,
       problem: problem.id,
-      phase: userProblem.phase+1,
+      phase: getCurrentPhaseNum()+1,
     }),
   })
   lastResult = await response.json();
@@ -147,6 +146,14 @@ async function sendSolution(event) {
 }
 
 function displayResult(message='error'){
+  if (message === 'right-answer') {
+    let solved = user.solved.find(p => p.number === lastResult.solved.number && p.phase === lastResult.solved.phase);
+    if(solved) solved = lastResult.solved;
+    else user.solved.push(lastResult.solved);
+    displayProblem();
+    displayProblemList();
+    problemStatementElem.scrollTop = problemStatementElem.scrollHeight;
+  }
   const feedbackMessage = feedbackMessages[message] || feedbackMessages.error;
   feedbackElem.style.display = 'none';
   feedbackElem.textContent = feedbackMessage;
@@ -154,14 +161,6 @@ function displayResult(message='error'){
   void feedbackElem.offsetWidth;
   feedbackElem.style.display = 'block';
 
-  if (message === 'right-answer') {
-    let userProblem = user.solved.find(p => p.number === currentProblemNum);
-    if(userProblem) userProblem = lastResult.solved;
-    else user.solved.push(lastResult.solved);
-    displayProblem();
-    displayProblemList();
-    problemStatementElem.scrollTop = problemStatementElem.scrollHeight;
-  }
 }
 
 function displayUser(user){
@@ -197,11 +196,17 @@ function displayUser(user){
   popupCheckboxElem.style.display = 'none';
 }
 
+function getCurrentPhaseNum(problemNum=currentProblemNum){
+  return Math.max(-1,...user.solved
+    .filter(solved => solved.number === problemNum)
+    .map(solved => solved.phase))
+}
+
 function displayProblem(problemNum=currentProblemNum) {
   currentProblemNum = parseInt(problemNum);
+  let currentPhaseNum = getCurrentPhaseNum(currentProblemNum);
   let problem = problems.find(p => p.number === currentProblemNum);
-  let userProblem = user.solved.find(p => p.id === problem.id) || {phase:-1};
-  answerInputElem.value = userProblem.solution || '';
+  answerInputElem.value = '';
   feedbackElem.style.display = 'none';
   let elem = document.querySelector('.nav--problems > .active')
   if(elem) elem.classList.remove('active');
@@ -212,8 +217,8 @@ function displayProblem(problemNum=currentProblemNum) {
     answerInputElem.disabled = false;
     problemTitleElem.textContent = `Problem ${problem.number}`;
     problemStatementElem.innerHTML = problem.phases
-      .filter((phase, i) => i <= userProblem.phase + 1)
-      .reduce((total, phase, i) => `${total}<h2>${ i<=userProblem.phase ? '✅ ' : '❌ '}Phase ${i+1}</h2><p>${phase.description}</p>`, '');
+      .filter((phase, i) => i <= currentPhaseNum + 1)
+      .reduce((total, phase, i) => `${total}<h2>${ i<=currentPhaseNum ? '✅ ' : '❌ '}Phase ${i+1}</h2><p>${phase.description}</p>`, '');
   }else {
     sendElem.disabled = true;
     answerInputElem.disabled = true;
@@ -225,8 +230,8 @@ function displayProblem(problemNum=currentProblemNum) {
 
 function displayProblemList() {
   problemListElem.innerHTML = problems.reduce((prev, problem) => {
-    let userProblem = user.solved.find(p => p.id === problem.id);
-    return `${prev}<li class="${problem.released ? 'available' : ''} ${userProblem ? 'done' : ''}" data-id="${problem.id}" data-number="${problem.number}"><a href="#/problem/${problem.number}" title="Problem ${problem.number}">${problem.number}</a></li>`
+    let currentPhaseNum = getCurrentPhaseNum(problem.number);
+    return `${prev}<li class="${problem.released ? 'available' : ''} ${currentPhaseNum >= 0 ? currentPhaseNum >= problem.phases.length -1 ? 'done' : 'in-progress' : ''}" data-id="${problem.id}" data-number="${problem.number}"><a href="#/problem/${problem.number}" title="Problem ${problem.number}">${problem.number}</a></li>`
   }, '');
 }
 
@@ -373,7 +378,9 @@ async function sendUserLogoutForm(){
   }
 }
 
-
+function getSolved(problemNum, phaseNum){
+  
+}
 
 function login(token, userData) {
   user = {

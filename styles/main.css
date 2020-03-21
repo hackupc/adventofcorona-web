@@ -106,6 +106,10 @@ nav::-webkit-scrollbar-thumb {
   --nav-txt: #24a36e;
 }
 
+.nav--problems > li.in-progress {
+  --nav-txt: #ffde49;
+}
+
 .nav--problems > li {
   --nav-txt: var(--nav-bg2);
 }
@@ -165,10 +169,21 @@ nav::-webkit-scrollbar-thumb {
   min-height: 10rem;
 }
 
+#problem-title {
+  margin-bottom: 0.5rem;
+}
+
 #problem-statement {
   overflow: auto;
-  padding-bottom: 0.5rem;
+  padding: 1.5rem 0;
   flex-grow: 1;
+}
+
+#problem-statement > *:first-child {
+  margin-top: 0;
+}
+#problem-statement > *:last-child {
+  margin-bottom: 0;
 }
 
 .logo{
@@ -491,6 +506,7 @@ button:disabled {
 .fade {
   position: relative;
   width: 100%;
+  pointer-events: none;
 }
 .fade::before {
   content: '';
