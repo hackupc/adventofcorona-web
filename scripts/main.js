@@ -10,6 +10,7 @@ const feedbackElem = document.getElementById('feedback');
 const problemListElem = document.getElementsByClassName('nav--problems')[0];
 const sendElem = document.getElementById('send-button');
 const userEmojiElem = document.getElementById('user-emoji');
+const rankingElem = document.getElementById('ranking');
 
 const feedbackMessages = {
   'right-answer': 'Yay! Right answer 🥳',
@@ -230,6 +231,7 @@ function displayProblem(problemNum=currentProblemNum) {
       moment(problem.release_time).tz(timezone).locale('en'+locale.slice(2)).calendar(null, {sameElse: 'LLLL'})
     }`;
   }
+  displayRanking(currentPhaseNum);
 }
 
 function displayProblemList() {
@@ -437,4 +439,28 @@ function popup(popupId, action = 'toggle') {
       }
       break;
   }
+}
+
+async function displayRanking(problemNum=currentProblemNum) {
+  let problem = problems.find(p => p.number === currentProblemNum);
+  if(problem.released){
+    if(window.matchMedia('(max-width: 40rem)').matches){
+      rankingElem.innerHTML = '<p style="margin-top: 1.5rem;">Reload to see the rankings</p>'
+    }else{
+      let response = await fetch(`${apiBaseUrl}/ranking/${problem.id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: apiAuthToken,
+          'Content-Type': 'application/json;charset=utf-8',
+        }
+      })
+      let ranking = await response.json();
+  
+      rankingElem.innerHTML = ranking.phases
+      .reduce((total, phaseRanking, i) => `${total}<h2>Phase ${i+1}</h2><ol>${phaseRanking.reduce((total, userRanked, i) => `${total}<li><span>${userRanked.emoji}</span><span>${userRanked.username.slice(0,15)}</span><span>${userRanked.time}</span><!--<span>${Math.floor(userRanked.score/10000000000)}pts.</span>--></li>`, '')}</ol>`, '');
+    }
+  }else{
+    rankingElem.innerHTML = '<p style="margin-top: 1.5rem;">No one yet. Try to be the first!</p>'
+  }
+
 }

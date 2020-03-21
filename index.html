@@ -33,6 +33,12 @@
   </script>
 </head>
 <body>
+  <div class="bg" aria-hidden="true">
+    <img class="bg-dot bg-dot--1" src="img/dot1.svg" alt="Decoration">
+    <img class="bg-dot bg-dot--2" src="img/dot2.svg" alt="Decoration">
+    <img class="bg-dot bg-dot--3" src="img/dot3.svg" alt="Decoration">
+    <img class="bg-logo" src="img/logo-advent-of-corona.svg" alt="Advent of Corona logo">
+  </div>
   <nav>
     <ul class="nav nav--others">
       <li><a href="#/help" title="Help">❔</a></li>
@@ -42,12 +48,6 @@
     <ul class="nav nav--problems"></ul>
   </nav>
   <div class="main">
-    <div class="bg" aria-hidden="true">
-      <img class="bg-dot bg-dot--1" src="img/dot1.svg" alt="Decoration">
-      <img class="bg-dot bg-dot--2" src="img/dot2.svg" alt="Decoration">
-      <img class="bg-dot bg-dot--3" src="img/dot3.svg" alt="Decoration">
-      <img class="bg-logo" src="img/logo-advent-of-corona.svg" alt="Advent of Corona logo">
-    </div>
     <div class="problem">
       <h1 id="problem-title"></h1>
       <div class="fade fade--small fade--down"></div>
@@ -56,7 +56,7 @@
     </div>
     <div class="answer">
       <h2><label for="answer-input">Answer</label></h2>
-      <textarea name="answer" id="answer-input" cols="30" rows="2"></textarea>
+      <textarea name="answer" id="answer-input" cols="40" rows="1"></textarea>
       <div class="answer-row">
         <a class="logo" href="https://hackersatupc.org">
           <img src="img/logo-hackersatupc.svg" alt="Hackers@UPC logo">
@@ -67,12 +67,18 @@
       </div>
     </div>
   </div>
+  <div class="ranking">
+    <h1>Ranking</h1>
+    <div class="fade fade--down"></div>
+    <div class="ranking__content" id="ranking"></div>
+    <div class="fade"></div>
+  </div>
   <div class="popup" data-popup="user" style="display: none;">
     <div class="popup__box">
       <h3 id="popup-user-title">Register/Login</h3>
       <form class="popup__content popup__content--login">
         <label for="popup-username">Username</label>
-        <input type="text" name="username" id="popup-username" autocomplete="username">
+        <input type="text" name="username" id="popup-username" autocomplete="username" maxlength="15">
         <label for="popup-password">Password</label>
         <input type="password" name="password" id="popup-password" autocomplete="current-password" onkeypress="if(event.key === 'Enter') sendUserForm();">
         <!-- <label for="popup-email">Email <small>(only to register)</small></label> -->
