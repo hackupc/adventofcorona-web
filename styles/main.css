@@ -512,7 +512,7 @@ button:disabled {
   margin: -1rem;
 }
 .popup__content--help {
-  padding: 1.5rem 0;
+  padding: 1.5rem 0.5rem 1.5rem 0;
 }
 .popup__content--help > *:last-child {
   margin-bottom: 0;
