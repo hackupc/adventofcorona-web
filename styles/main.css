@@ -7,6 +7,7 @@
   --ease-bounce: cubic-bezier(0.18, 0.89, 0.32, 1.28);
   --focus-color: #0f0;
   --accent: #146bce;
+  --accent-contrast: #78b1f2;
 }
 
 body {
@@ -24,7 +25,7 @@ body {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-contrast);
 }
 
 ::selection{
