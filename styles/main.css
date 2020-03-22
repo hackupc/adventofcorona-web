@@ -12,7 +12,7 @@
 
 body {
   display: grid;
-  grid-template: auto / 5rem auto 16rem;
+  grid-template: auto / 5rem auto min-content;
   margin: 0;
   height: calc(var(--vh, 1vh) * 100);
   background: var(--bg);
@@ -176,7 +176,7 @@ h1 {
 
 #problem-statement {
   overflow: auto;
-  padding: 1.5rem 0;
+  padding: 1.5rem 0.5rem 1.5rem 0;
   flex-grow: 1;
 }
 
@@ -505,6 +505,7 @@ button:disabled {
 .popup__content {
   overflow: auto;
   flex-grow: 1;
+  padding-right: 0.5rem;
 }
 .popup__content--login {
   padding: 1rem;
@@ -555,14 +556,16 @@ button:disabled {
 .ranking__content{
   flex-grow: 1;
   overflow: auto;
+  padding-right: 0.5rem;
 }
 .ranking__content > *:last-child {
-  margin-bottom: 0;
+  /* margin-bottom: 0; */
 }
 .ranking__content ol {
   padding-left: 2rem;
 }
 .ranking__content li {
+  white-space: nowrap;
 }
 .ranking__content li > span {
   display: inline-block;
