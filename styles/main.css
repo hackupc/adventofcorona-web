@@ -270,16 +270,18 @@ button:disabled {
   cursor: not-allowed;
 }
 .answer-row > a,
-.popup a {
+.popup a,
+.problem a {
   transition: box-shadow 200ms var(--ease-bounce);
   box-shadow: 0 0 0 0 var(--focus-color);
   border-radius: 0.5rem;
-  padding: 0.5rem;
-  margin: -0.5rem;
+  padding: 0.25rem;
+  margin: -0.25rem;
   outline: none;
 }
 .answer-row > a:focus,
-.popup a:focus {
+.popup a:focus,
+.problem a:focus {
   box-shadow: 0 0 0 0.2rem var(--focus-color);
 }
 .answer-row > span {
