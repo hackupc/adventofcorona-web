@@ -17,7 +17,7 @@ body {
   height: calc(var(--vh, 1vh) * 100);
   background: var(--bg);
   color: #fff;
-  font-family: monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 
 * {
@@ -247,7 +247,7 @@ button {
   background-color: var(--accent);
   color: #fff;
   font-weight: bold;
-  font-family: monospace;
+  font-family: 'Roboto Mono', monospace;
   border: none;
   font-size: 1rem;
   padding: 0.5rem 0.75rem 0.5rem 1rem;
