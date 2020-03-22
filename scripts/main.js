@@ -433,7 +433,7 @@ function popup(popupId, action = 'toggle') {
 async function displayRanking(problemNum=currentProblemNum) {
   let problem = problems.find(p => p.number === currentProblemNum);
   if(problem.released){
-    if(window.matchMedia('(max-width: 40rem)').matches){
+    if(window.matchMedia('(max-width: 45rem)').matches){
       rankingElem.innerHTML = '<p style="margin-top: 1.5rem;">Reload to see the rankings</p>'
     }else{
       let response = await fetch(`${apiBaseUrl}/ranking/${problem.id}`, {

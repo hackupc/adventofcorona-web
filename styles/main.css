@@ -562,7 +562,7 @@ button:disabled {
   /* margin-bottom: 0; */
 }
 .ranking__content ol {
-  padding-left: 2rem;
+  padding-left: 2.5rem;
 }
 .ranking__content li {
   white-space: nowrap;
@@ -572,12 +572,12 @@ button:disabled {
   margin-right: 0.5rem;
 }
 .ranking__content li > span:nth-child(1) { width: 1rem; text-align: center; }
-.ranking__content li > span:nth-child(2) { width: 7rem; }
-.ranking__content li > span:nth-child(3) { width: 3.5rem; text-align: right; }
+.ranking__content li > span:nth-child(2) { width: 9rem; }
+.ranking__content li > span:nth-child(3) { width: 4.5rem; text-align: right; }
 /* .ranking__content li > span:nth-child(4) { width: 3.5rem; text-align: right; } */
 .ranking__content li > span:last-child { margin-right: 0; }
 
-@media(max-width: 40rem) {
+@media(max-width: 45rem) {
   body {
     grid-template: auto / 5rem auto 0;
   }
