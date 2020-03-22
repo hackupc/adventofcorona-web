@@ -369,21 +369,10 @@ async function sendUserLogoutForm(){
     },
   })
   
-  if (response.ok) { 
-    localStorage.removeItem('user');
-    localStorage.removeItem('apiAuthToken');
-
-    window.location = '/';
-  } else {
-    error = true;
-    console.error('Cant logout');
-    let buttonElem = document.getElementById('popup-user-send');
-    buttonElem.style.display = 'none';
-    buttonElem.style.animation = 'shake 0.4s linear';
-    void buttonElem.offsetWidth;
-    buttonElem.style.display = 'block';
-    setTimeout(() => {buttonElem.style.animation = ''}, 400);
-  }
+  localStorage.removeItem('user');
+  localStorage.removeItem('apiAuthToken');
+  localStorage.removeItem('problems');
+  window.location = '/';
 }
 
 function getSolved(problemNum, phaseNum){
