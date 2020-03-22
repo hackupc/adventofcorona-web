@@ -37,6 +37,7 @@
 }
 .cookie-notice__link {
 	white-space: nowrap;
+	color: #0d4687 !important;
 }
 
 @keyframes slide-down {
