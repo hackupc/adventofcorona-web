@@ -2,7 +2,7 @@ var currentProblemNum = 1;
 var currentProblemId = '';
 var problems = JSON.parse(localStorage.getItem('problems')) || [];
 var user = JSON.parse(localStorage.getItem('user')) || {solved:[]}
-var lastResult = {};
+var lastResult = {solved:{}};
 const problemTitleElem = document.getElementById('problem-title');
 const problemStatementElem = document.getElementById('problem-statement');
 const answerInputElem = document.getElementById('answer-input');
@@ -121,13 +121,13 @@ async function sendSolution(event) {
     return;
   }
 
-  let problem = problems.find(p => p.number === currentProblemNum);
-  if(lastResult.answer === answerInputElem.value 
-    && lastResult.problem === problem.id) {
+  if(lastResult.solved.solution === answerInputElem.value 
+    && lastResult.solved.number === currentProblemNum) {
       let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
       displayResult(feedbackMessage);
-    return;
-  }
+      return;
+    }
+  let problem = problems.find(p => p.number === currentProblemNum);
   let response = await fetch(`${apiBaseUrl}/problem/submit`, {
     method: 'POST',
     headers: {
