@@ -17,6 +17,7 @@ const feedbackMessages = {
   'wrong-answer': 'Ops... Wrong answer 🤒',
   'error': 'Error evaluating your answer, try later 😵',
   'require-login': 'Log in to send your answer 🙄',
+  'too-many-requests': 'Don\'t try every answer. Leave 10s between submits. 🤔',
 };
 const apiBaseUrl = 'https://corona-2w3jqbocga-ew.a.run.app'; // Production
 // const apiBaseUrl = 'https://dev-2w3jqbocga-ew.a.run.app/'; // Development
@@ -123,8 +124,7 @@ async function sendSolution(event) {
 
   if(lastResult.solved.solution === answerInputElem.value 
     && lastResult.solved.number === currentProblemNum) {
-      let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
-      displayResult(feedbackMessage);
+      displayResult(getFeedbackMessage(lastResult));
       return;
     }
   let problem = problems.find(p => p.number === currentProblemNum);
@@ -141,9 +141,17 @@ async function sendSolution(event) {
     }),
   })
   lastResult = await response.json();
-  
-  let feedbackMessage = (lastResult.correct === undefined ? 'error' : lastResult.correct ? 'right-answer' : 'wrong-answer' );
-  displayResult(feedbackMessage);
+
+  displayResult(getFeedbackMessage(lastResult));
+}
+
+function getFeedbackMessage(response=lastResult){
+  if(lastResult.correct !== undefined){
+    if (lastResult.correct) return 'right-answer';
+    else return 'wrong-answer'
+  } else {
+    if(response.status === 429) return 'too-many-requests';
+  }
 }
 
 function displayResult(message='error'){
