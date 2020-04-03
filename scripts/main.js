@@ -8,6 +8,7 @@ const problemStatementElem = document.getElementById('problem-statement');
 const answerInputElem = document.getElementById('answer-input');
 const feedbackElem = document.getElementById('feedback');
 const problemListElem = document.getElementsByClassName('nav--problems')[0];
+const globalRankingElem = document.getElementById('globalRanking');
 const sendElem = document.getElementById('send-button');
 const userEmojiElem = document.getElementById('user-emoji');
 const rankingElem = document.getElementById('ranking');
@@ -64,6 +65,10 @@ router.add('/', () => {
 
 router.add('/help', () => {
   popup('help', 'open');
+});
+
+router.add('/ranking', () => {
+  popup('ranking', 'open');
 });
 
 router.add('/login', () => {
@@ -418,6 +423,7 @@ function popup(popupId, action = 'toggle') {
   switch (action) {
     case 'open':
       popupElem.style.display = 'flex';
+      if (popupId === 'ranking') loadGlobalRanking();
       break;
       case 'close':
         popupElem.classList.add('popup--hiden');
@@ -460,4 +466,25 @@ async function displayRanking(problemNum=currentProblemNum) {
     rankingElem.innerHTML = '<p style="margin-top: 1.5rem;">No one yet. Try to be the first!</p>'
   }
 
+}
+
+function loadGlobalRanking() {
+  console.log('hii');
+
+  fetch(`${apiBaseUrl}/ranking`, {
+    method: 'GET',
+    headers: {
+      Authorization: apiAuthToken,
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  })
+  .then(response => response.json())
+  .then(result => {
+    const ranking = result.data;
+    console.log(ranking);
+    
+    globalRankingElem.innerHTML = result.data.reduce((total, userRanked, i) => `${total}<li><span>${userRanked.emoji}</span><span>${userRanked.username.slice(0,15)}</span><span>${Math.floor(userRanked.score)}</span></li>`,'');
+  });
+
+  displayResult(getFeedbackMessage(lastResult));
 }
