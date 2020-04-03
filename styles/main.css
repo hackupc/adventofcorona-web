@@ -567,7 +567,7 @@ button:disabled {
 .ranking__content ol{
   padding-left: 2.5rem;
 }
-#globalRanking ol{
+#globalRanking{
   padding-left: 3rem;
 }
 .ranking__content li,
