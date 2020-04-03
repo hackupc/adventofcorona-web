@@ -469,8 +469,6 @@ async function displayRanking(problemNum=currentProblemNum) {
 }
 
 function loadGlobalRanking() {
-  console.log('hii');
-
   fetch(`${apiBaseUrl}/ranking`, {
     method: 'GET',
     headers: {
@@ -480,9 +478,6 @@ function loadGlobalRanking() {
   })
   .then(response => response.json())
   .then(result => {
-    const ranking = result.data;
-    console.log(ranking);
-    
     globalRankingElem.innerHTML = result.data.reduce((total, userRanked, i) => `${total}<li><span>${userRanked.emoji}</span><span>${userRanked.username.slice(0,15)}</span><span>${Math.floor(userRanked.score)}</span></li>`,'');
   });
 
