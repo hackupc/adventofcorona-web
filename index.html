@@ -45,6 +45,7 @@
   <nav>
     <ul class="nav nav--others">
       <li><a href="#/help" title="Help">❔</a></li>
+      <li><a href="#/ranking" title="Ranking">🏆</a></li>
       <li><a href="#/login" title="Log In" id="user-emoji">👤</a></li>
       <li style="display: none;"><a href="#share" id="share" title="share">📤</a></li>
     </ul>
@@ -123,6 +124,17 @@
       </div>
       <div class="fade"></div>
       <button onclick="popup('help', 'close')">Okay</button>
+    </main>
+  </div>
+  <div class="popup" data-popup="ranking" style="display: none;">
+    <main class="popup__box popup__box--ranking">
+      <h3>Ranking</h3>
+      <div class="fade fade--down"></div>
+      <div class="popup__content popup__content--ranking">
+        
+      </div>
+      <div class="fade"></div>
+      <button onclick="popup('ranking', 'close')">Okay</button>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vanilla-router@1.2.8/index.min.js"></script>

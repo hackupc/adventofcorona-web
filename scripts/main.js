@@ -66,6 +66,10 @@ router.add('/help', () => {
   popup('help', 'open');
 });
 
+router.add('/ranking', () => {
+  popup('ranking', 'open');
+});
+
 router.add('/login', () => {
   popup('user', 'open');
 });
@@ -418,6 +422,7 @@ function popup(popupId, action = 'toggle') {
   switch (action) {
     case 'open':
       popupElem.style.display = 'flex';
+      if (popupId === 'ranking') loadGlobalRanking();
       break;
       case 'close':
         popupElem.classList.add('popup--hiden');
@@ -460,4 +465,9 @@ async function displayRanking(problemNum=currentProblemNum) {
     rankingElem.innerHTML = '<p style="margin-top: 1.5rem;">No one yet. Try to be the first!</p>'
   }
 
+}
+
+function loadGlobalRanking() {
+  console.log('hii');
+  
 }
