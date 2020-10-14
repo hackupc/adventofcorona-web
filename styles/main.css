@@ -130,6 +130,10 @@ nav::-webkit-scrollbar-thumb {
   outline: none;
 }
 
+.nav > li > a > img {
+  height: 2.25rem;
+}
+
 .nav > li > a::before {
   transition: box-shadow 200ms var(--ease-bounce);
   box-shadow: 0 0 0 0 var(--focus-color);
