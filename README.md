@@ -1,6 +1,8 @@
 # Advent of Corona webpage
 Like advent of code, but during the corona confinement #istayathome
 
+> Use it here https://adventofcorona.hackersatupc.org/
+
 ![](/img/preview.png)
 
 ![](/img/ogimage.png)
